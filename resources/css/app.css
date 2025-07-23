@@ -1,0 +1,88 @@
+/* resources/css/app.css */
+
+/* =================================================================== */
+/* Paleta de colores y estilos generales (Tus estilos - ¡Están bien!) */
+/* =================================================================== */
+:root {
+    --bs-primary: #6D3BFF; /* Vibrante purple */
+    --bs-primary-rgb: 109, 59, 255;
+    --bs-secondary: #F7FAFC; /* Light gray */
+    --bs-accent: #FF7A59; /* Coral orange */
+    --bs-body-font-family: 'Inter', sans-serif;
+}
+
+.font-headline {
+    font-family: 'Inter', sans-serif; /* O 'Poppins' si lo prefieres */
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--bs-primary);
+    --bs-btn-border-color: var(--bs-primary);
+    --bs-btn-hover-bg: #5a2fd6;
+    --bs-btn-hover-border-color: #5a2fd6;
+}
+
+.btn-accent {
+    --bs-btn-bg: var(--bs-accent);
+    --bs-btn-border-color: var(--bs-accent);
+    --bs-btn-hover-bg: #e66a4f;
+    --bs-btn-hover-border-color: #e66a4f;
+}
+
+.text-primary { color: var(--bs-primary) !important; }
+
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.icon-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =================================================================== */
+/* CÓDIGO DEFINITIVO Y LIMPIO PARA EL HEADER (Soluciona todo)          */
+/* =================================================================== */
+
+/* 1. Espacio para el header fijo. Debe coincidir con la altura del navbar. */
+.main-content {
+    padding-top: 80px;
+}
+
+/* 2. Estilo base del header (transparente) */
+#main-header {
+    background-color: transparent;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* 3. Estilo del header al hacer scroll (con blur) */
+#main-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* 4. TAMAÑO CONSTANTE Y ALINEACIÓN VERTICAL */
+/* Esta regla establece la altura fija de 80px para el navbar en todo momento.
+   Bootstrap se encargará de centrar verticalmente los elementos dentro. */
+#main-header .navbar {
+    min-height: 80px;
+}
+
+/* 5. Estilo de la sección Hero */
+.hero-section {
+    position: relative;
+    min-height: 80vh;
+    background: url('https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MjA1MTIwOS13aWtpbWVkaWEtaW1hZ2Uta293YXZ1eHIuanBn.jpg') center center/cover no-repeat;
+}
