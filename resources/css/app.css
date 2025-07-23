@@ -10,7 +10,15 @@
     --bs-accent: #FF7A59; /* Coral orange */
     --bs-body-font-family: 'Inter', sans-serif;
 }
-
+body {
+    /* Esto le dice al cuerpo de la página que oculte
+       cualquier contenido que intente desbordarse
+       horizontalmente. Es la solución más efectiva. */
+    overflow-x: hidden;
+}
+/* * {
+    outline: 1px solid red;
+  } */
 .font-headline {
     font-family: 'Inter', sans-serif; /* O 'Poppins' si lo prefieres */
 }
@@ -85,4 +93,37 @@
     position: relative;
     min-height: 80vh;
     background: url('https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MjA1MTIwOS13aWtpbWVkaWEtaW1hZ2Uta293YXZ1eHIuanBn.jpg') center center/cover no-repeat;
+}
+/* === ESTILOS PARA EL MENÚ OFFCANVAS === */
+
+.offcanvas {
+    /* Un ancho un poco mayor al por defecto */
+    --bs-offcanvas-width: 320px;
+}
+
+.offcanvas-header {
+    /* Borde inferior para separar el título */
+    border-bottom: 1px solid var(--bs-border-color-translucent);
+}
+
+.offcanvas-body .nav-link {
+    /* Estilo de los enlaces del menú */
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.offcanvas-body .nav-link:hover {
+    color: var(--bs-primary);
+}
+
+.offcanvas-body .btn {
+    /* Asegura que el botón ocupe todo el ancho disponible */
+    width: 100%;
+}
+
+@media (max-width: 400px) {
+  .offcanvas {
+    --bs-offcanvas-width: 90vw;
+  }
 }
