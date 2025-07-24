@@ -1,7 +1,17 @@
 /* resources/css/app.css */
 
 /* =================================================================== */
-/* Paleta de colores y estilos generales (Tus estilos - ¡Están bien!) */
+/* Solución Definitiva para el Scroll Horizontal
+/* =================================================================== */
+html, body {
+    /* Esta es la regla más importante. Al aplicarla a ambos,
+       forzamos a que nada pueda salirse de la pantalla. */
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* =================================================================== */
+/* Paleta de colores y estilos generales (Tus estilos)
 /* =================================================================== */
 :root {
     --bs-primary: #6D3BFF; /* Vibrante purple */
@@ -10,15 +20,7 @@
     --bs-accent: #FF7A59; /* Coral orange */
     --bs-body-font-family: 'Inter', sans-serif;
 }
-body {
-    /* Esto le dice al cuerpo de la página que oculte
-       cualquier contenido que intente desbordarse
-       horizontalmente. Es la solución más efectiva. */
-    overflow-x: hidden;
-}
-/* * {
-    outline: 1px solid red;
-  } */
+
 .font-headline {
     font-family: 'Inter', sans-serif; /* O 'Poppins' si lo prefieres */
 }
@@ -57,12 +59,11 @@ body {
     justify-content: center;
 }
 
-
 /* =================================================================== */
-/* CÓDIGO DEFINITIVO Y LIMPIO PARA EL HEADER (Soluciona todo)          */
+/* CÓDIGO DEFINITIVO Y LIMPIO PARA EL HEADER
 /* =================================================================== */
 
-/* 1. Espacio para el header fijo. Debe coincidir con la altura del navbar. */
+/* 1. Espacio para el header fijo. */
 .main-content {
     padding-top: 80px;
 }
@@ -82,8 +83,6 @@ body {
 }
 
 /* 4. TAMAÑO CONSTANTE Y ALINEACIÓN VERTICAL */
-/* Esta regla establece la altura fija de 80px para el navbar en todo momento.
-   Bootstrap se encargará de centrar verticalmente los elementos dentro. */
 #main-header .navbar {
     min-height: 80px;
 }
@@ -94,20 +93,20 @@ body {
     min-height: 80vh;
     background: url('https://images.rawpixel.com/image_social_landscape/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MjA1MTIwOS13aWtpbWVkaWEtaW1hZ2Uta293YXZ1eHIuanBn.jpg') center center/cover no-repeat;
 }
-/* === ESTILOS PARA EL MENÚ OFFCANVAS === */
+
+/* =================================================================== */
+/* ESTILOS PARA EL MENÚ OFFCANVAS (Móvil)
+/* =================================================================== */
 
 .offcanvas {
-    /* Un ancho un poco mayor al por defecto */
     --bs-offcanvas-width: 320px;
 }
 
 .offcanvas-header {
-    /* Borde inferior para separar el título */
     border-bottom: 1px solid var(--bs-border-color-translucent);
 }
 
 .offcanvas-body .nav-link {
-    /* Estilo de los enlaces del menú */
     color: #333;
     font-weight: 500;
     transition: color 0.2s ease;
@@ -118,12 +117,94 @@ body {
 }
 
 .offcanvas-body .btn {
-    /* Asegura que el botón ocupe todo el ancho disponible */
     width: 100%;
 }
+/* =================================================================== */
+/* ESTILOS PARA LAS NUEVAS SECCIONES INTERACTIVAS                     */
+/* =================================================================== */
 
-@media (max-width: 400px) {
-  .offcanvas {
-    --bs-offcanvas-width: 90vw;
-  }
+/* Tarjetas de Valores Interactivas */
+.card-hover-interactive {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover-interactive:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.12) !important;
+}
+.icon-circle-interactive {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+.card-hover-interactive:hover .icon-circle-interactive {
+    transform: scale(1.1);
+}
+
+/* Tarjetas de Equipo con Overlay (Versión Reducida y Centrada) */
+.team-card .team-card-img-container {
+    position: relative;
+    overflow: hidden;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%; /* Hace la imagen circular */
+    border: 4px solid #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-left: auto;
+    margin-right: auto;
+}
+.team-card .team-member-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Evita que la imagen se deforme */
+}
+.team-card .team-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Asegura que el overlay también sea circular */
+    background-color: rgba(109, 59, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.team-card:hover .team-card-overlay {
+    opacity: 1;
+}
+.team-card .team-card-overlay .btn {
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+    /* --- CORRECCIÓN PARA CÍRCULOS PERFECTOS --- */
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.team-card:hover .team-card-overlay .btn {
+    transform: translateY(0);
+}
+.team-card:hover .team-card-overlay .btn:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+
+/* Estilos para el Acordeón */
+.accordion-button:not(.collapsed) {
+    color: var(--bs-primary);
+    background-color: var(--bs-primary-bg-subtle);
+}
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+.text-accent {
+    color: var(--bs-accent) !important;
 }

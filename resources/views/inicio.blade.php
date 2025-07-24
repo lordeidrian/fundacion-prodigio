@@ -16,6 +16,107 @@
             </div>
         </div>
     </section>
+    {{-- NUEVA SECCIÓN: "Nuestra Causa" con Tarjetas --}}
+    <section id="causa" class="py-5 bg-white">
+        <div class="container my-5">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="display-5 fw-bold font-headline text-dark">Creemos en un futuro que empieza con una sonrisa</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                        Promovemos el bienestar de personas en condición de vulnerabilidad mediante la prestación de servicios de atención odontológica de calidad y gratuitos.
+                    </p>
+                </div>
+            </div>
+            <div class="row g-4 mt-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover-interactive p-3">
+                        <div class="card-body text-center">
+                            <div class="icon-circle-interactive bg-primary-subtle text-primary mx-auto mb-3">
+                                <i class="bi bi-heart-pulse fs-2"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Salud Materno-Infantil</h5>
+                            <p class="card-text text-muted small">Mejoramos la salud bucal desde la concepción para asegurar que cada madre y niño pueda vivir una vida plena y saludable.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover-interactive p-3">
+                        <div class="card-body text-center">
+                            <div class="icon-circle-interactive bg-primary-subtle text-primary mx-auto mb-3">
+                                <i class="bi bi-shield-check fs-2"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Atención Gratuita y de Calidad</h5>
+                            <p class="card-text text-muted small">Garantizamos el acceso a una atención odontológica integral y sin costo para mujeres embarazadas y niños de 0 a 3 años.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm card-hover-interactive p-3">
+                        <div class="card-body text-center">
+                            <div class="icon-circle-interactive bg-primary-subtle text-primary mx-auto mb-3">
+                                <i class="bi bi-people-fill fs-2"></i>
+                            </div>
+                            <h5 class="card-title fw-bold">Compromiso Comunitario</h5>
+                            <p class="card-text text-muted small">Nos involucramos activamente para transformar la realidad de las comunidades vulnerables en Paraguay.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Sección "Nuestro Trabajo" (Resumen con enlace) --}}
+    <section id="trabajo" class="py-5 bg-light">
+        <div class="container my-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold font-headline text-dark">Conoce Nuestro Trabajo</h2>
+                    <p class="lead text-muted">
+                        A través de nuestros proyectos y nuestro centro de vanguardia, hacemos tangible nuestro compromiso con la salud bucal.
+                    </p>
+                    <p class="text-muted">
+                        Desde el proyecto "Embarazo Sonriente" hasta las instalaciones del Centro Odontológico Integral (COI), cada acción está diseñada para ofrecer un cuidado digno y de excelencia. Descubre cómo estamos marcando la diferencia.
+                    </p>
+                    <a href="{{ route('proyectos') }}" class="btn btn-primary mt-3">Ver Proyectos</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://fundacionprodigio.org/wp-content/uploads/2024/07/coi-compress.jpg" class="img-fluid rounded-3 shadow-lg" alt="Instalaciones del Centro Odontológico Integral">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- NUEVA SECCIÓN: "Cómo Ayudar" (Call to Action) --}}
+     <section id="ayudar" class="py-5 bg-white">
+        <div class="container my-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold font-headline text-dark">Súmate a Nuestra Causa</h2>
+                <p class="lead text-muted mx-auto" style="max-width: 800px;">Tu apoyo es fundamental para que podamos seguir brindando sonrisas saludables. Hay muchas formas de colaborar.</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                        <div class="card-body">
+                            <i class="bi bi-gift-fill fs-1 text-accent"></i>
+                            <h4 class="card-title fw-bold mt-3">Realiza una Donación</h4>
+                            <p class="card-text text-muted">Aporta económicamente para ayudarnos a cubrir los costos de insumos y tratamientos.</p>
+                            <a href="{{ route('contacto') }}" class="btn btn-accent text-white mt-auto">Donar Ahora</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm text-center p-4">
+                        <div class="card-body">
+                            <i class="bi bi-building fs-1 text-accent"></i>
+                            <h4 class="card-title fw-bold mt-3">Alianzas Corporativas</h4>
+                            <p class="card-text text-muted">Conviértete en un socio estratégico y demuestra el compromiso social de tu empresa.</p>
+                            <a href="{{ route('contacto') }}" class="btn btn-outline-primary mt-auto">Contactar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     {{-- Services Section --}}  
     @include('pages.partials.services')
