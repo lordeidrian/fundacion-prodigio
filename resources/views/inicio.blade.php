@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Hero Section --}}
-    <section id="home" class="hero-section text-center text-white d-flex align-items-center justify-content-center">
+    <section id="home" class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: url('{{ asset('images/banner-4.jpg') }}') center center / cover no-repeat;">
         <div class="container z-2">
             <h1 class="display-3 fw-bold text-primary font-headline">Brightening Lives, One Smile at a Time</h1>
             <p class="lead text-dark my-4 mx-auto" style="max-width: 700px;">
