@@ -43,7 +43,7 @@
     <div class="fixed-action-buttons">
         <!-- Botón "Volver Arriba" (inicialmente oculto por CSS) -->
         <button id="scrollToTopBtn" class="btn btn-primary rounded-circle shadow-lg button-fixed-size">
-            <i class="bi bi-arrow-up fs-4"></i>
+            <i class="bi bi-chevron-up fs-4"></i>
         </button>
 
         <!-- Botón de WhatsApp -->
