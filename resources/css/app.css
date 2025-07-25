@@ -127,6 +127,7 @@ html, body {
 
 .offcanvas {
     --bs-offcanvas-width: 320px;
+    z-index: 4000;
 }
 
 .offcanvas-header {
@@ -256,7 +257,7 @@ html, body {
 /* Contenedor de los botones fijos (WhatsApp y Volver Arriba) */
 .fixed-action-buttons {
     position: fixed;
-    bottom: 70px;
+    bottom: 110px;
     right: 10px;
     z-index: 1050;
     display: flex;
