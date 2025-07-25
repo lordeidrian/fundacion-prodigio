@@ -19,6 +19,33 @@ html, body {
     --bs-secondary: #F7FAFC; /* Light gray */
     --bs-accent: #FF7A59; /* Coral orange */
     --bs-body-font-family: 'Inter', sans-serif;
+    --background: 210 40% 98%;   /* HSL para un gris muy claro/blanco azulado */
+    --secondary: 210 40% 91%;    /* HSL para un gris claro ligeramente más oscuro */
+}
+/* Clases para fondos de sección */
+.footer-bg-default {
+    background-color: #1A1A1A; /* Usa el color --background */
+    color: #fff;
+}
+.logo-footer {
+    color: #fff !important;
+}
+.footer-bg-default .text-muted {
+    color: #CCCCCC !important;
+}
+
+.section-bg-default {
+    background-color: hsl(var(--background)); /* Usa el color --background */
+}
+
+.section-bg-secondary {
+    background-color: hsl(var(--secondary)); /* Usa el color --secondary */
+}
+
+/* Opcional: Para asegurar que el texto sea legible sobre estos fondos claros */
+.section-bg-default,
+.section-bg-secondary {
+    color: var(--color-dark-grey, #212121); /* Define un color de texto oscuro por defecto */
 }
 
 .font-headline {
@@ -207,4 +234,211 @@ html, body {
 }
 .text-accent {
     color: var(--bs-accent) !important;
+}
+/* Contenedor principal de los botones fijos */
+.fixed-buttons-container {
+    position: fixed;
+    bottom: 30px; /* Distancia desde abajo */
+    right: 30px; /* Distancia desde la derecha */
+    z-index: 1050; /* Asegura que estén por encima de la mayoría de los elementos */
+    display: flex;
+    flex-direction: column; /* Apila los botones verticalmente */
+    align-items: flex-end; /* Alinea los elementos a la derecha dentro del contenedor */
+    gap: 15px; /* Espacio entre los botones */
+    /* Para pantallas más pequeñas, ajusta la posición si es necesario */
+    @media (max-width: 768px) {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+}
+
+/* Contenedor de los botones fijos (WhatsApp y Volver Arriba) */
+.fixed-action-buttons {
+    position: fixed;
+    bottom: 70px;
+    right: 10px;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilo común para asegurar el mismo tamaño en ambos botones */
+.button-fixed-size {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    @media (max-width: 768px) {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.button-fixed-size:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
+
+/* Estilos específicos para el botón "Volver Arriba" (inicialmente oculto) */
+#scrollToTopBtn {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+/* Clase para mostrar el botón "Volver Arriba" */
+#scrollToTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Estilos para el Mini Chat de WhatsApp */
+.whatsapp-minichat {
+    position: fixed;
+    bottom: 30px;
+    right: calc(30px + 60px + 15px); /* Posiciona a la izquierda de los botones */
+    z-index: 1049;
+
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 320px; /* Ancho ajustado para parecer más a un chat */
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+    /* Fondo característico de WhatsApp */
+    background-color: #ECE5DD; /* Color base del fondo de WhatsApp */
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719142-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); /* Patrón de fondo de WhatsApp */
+    background-repeat: repeat;
+    background-size: 100px; /* Ajusta el tamaño del patrón si es necesario */
+
+    /* Ajustes responsivos para pantallas pequeñas */
+    @media (max-width: 768px) {
+        width: 100vw; /* Ocupa el 100% del ancho del viewport */
+        right: 0;     /* Se alinea al borde derecho */
+        left: 0;      /* Se alinea al borde izquierdo */
+        bottom: 0;    /* Se posiciona en la parte inferior de la pantalla */
+        border-radius: 0; /* Opcional: Quita los bordes redondeados en la parte inferior para un look de "hoja inferior" */
+        /* Si tenías algún transform: translateX(), asegúrate de que no interfiera o de quitarlo aquí */
+        transform: none; /* Asegura que no haya transformaciones que lo desplacen */
+        z-index: 5000;
+    }
+}
+
+/* Clase para mostrar el mini chat */
+.whatsapp-minichat.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* Encabezado del mini chat (similar a WhatsApp) */
+.minichat-header-whatsapp {
+    background-color: #075E54; /* Verde oscuro de WhatsApp */
+    color: #FFFFFF;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    @media (max-width: 768px) {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+}
+
+.minichat-logo {
+    width: 40px; /* Tamaño del logo en el header */
+    height: 40px;
+    border-radius: 50%; /* Para que sea circular */
+    object-fit: cover;
+    background-color: #FFFFFF; /* Fondo blanco para el logo si es necesario */
+    padding: 2px; /* Pequeño padding alrededor del logo */
+}
+
+.minichat-company-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.minichat-response-time {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.minichat-close-btn {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+.minichat-close-btn:hover {
+    opacity: 1;
+}
+
+/* Cuerpo del mini chat (donde van los mensajes) */
+.minichat-body-whatsapp {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-dark-grey, #212121);
+}
+
+/* Burbuja de mensaje */
+.minichat-message-bubble {
+    background-color: #DCF8C6; /* Verde claro de burbuja de WhatsApp */
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Espacio debajo de la burbuja */
+    max-width: 85%; /* Para que no ocupe todo el ancho y parezca una burbuja */
+    align-self: flex-start; /* Alinea la burbuja a la izquierda (como si fuera un mensaje entrante) */
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13); /* Sombra sutil */
+}
+
+.minichat-message-bubble p {
+    margin-bottom: 0; /* Elimina el margen inferior del párrafo dentro de la burbuja */
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Estilos para el botón de "Chatear por WhatsApp" dentro del mini chat */
+.btn-whatsapp-chat {
+    background-color: #25D366; /* Color oficial de WhatsApp */
+    border-color: #25D366;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 20px; /* Botón más redondeado */
+    padding: 10px 15px;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+.btn-whatsapp-chat:hover {
+    background-color: #1DA851; /* Un verde de WhatsApp ligeramente más oscuro al hover */
+    border-color: #1DA851;
+}
+
+/* Asegurar que los iconos en los botones de color sean blancos */
+.whatsapp-btn i, .scroll-to-top-btn i {
+    color: #FFFFFF;
 }

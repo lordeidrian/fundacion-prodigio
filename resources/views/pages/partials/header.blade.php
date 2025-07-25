@@ -14,12 +14,11 @@
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('proyectos') }}">Nuestro Trabajo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('proyectos') }}">Nuestro Trabajo</a></li>                    
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="{{ route('contacto') }}" class="btn btn-accent text-white shadow-sm">Donar Ahora</a>
+                        <a href="{{ route('contacto') }}" class="btn btn-accent text-white shadow-sm">Contacto</a>
                     </li>
                 </ul>
             </div>
@@ -48,8 +47,8 @@
             <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('inicio') }}">Inicio</a></li>
             <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('nosotros') }}">Nosotros</a></li>
             <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('proyectos') }}">Nuestro Trabajo</a></li>
-            <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('contacto') }}">Contacto</a></li>
+            
         </ul>
-        <a href="{{ route('contacto') }}" class="btn btn-accent text-white btn-lg mt-auto">Donar Ahora</a>
+        <a href="{{ route('contacto') }}" class="btn btn-accent text-white btn-lg mt-auto">Contacto</a>
     </div>
 </div>
