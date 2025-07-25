@@ -64,20 +64,20 @@
             </div>
         </div>
     </section>
-
+    
     {{-- Sección "Nuestro Trabajo" (Resumen con enlace) --}}
     <section id="trabajo" class="py-5 bg-light">
         <div class="container my-5">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold font-headline text-dark">Conoce Nuestro Trabajo</h2>
+                    <h2 class="display-5 fw-bold font-headline text-dark">Conoce Nuestro Impacto y Proyectos</h2>
                     <p class="lead text-muted">
-                        A través de nuestros proyectos y nuestro centro de vanguardia, hacemos tangible nuestro compromiso con la salud bucal.
+                        Explora en detalle cómo nuestros programas transforman vidas y el rol de nuestro Centro Odontológico Integral (COI) en este esfuerzo.
                     </p>
                     <p class="text-muted">
-                        Desde el proyecto "Embarazo Sonriente" hasta las instalaciones del Centro Odontológico Integral (COI), cada acción está diseñada para ofrecer un cuidado digno y de excelencia. Descubre cómo estamos marcando la diferencia.
+                        Desde la implementación de programas educativos hasta las alianzas estratégicas que nos permiten llegar más lejos, cada acción refleja nuestro compromiso con la salud bucal de Paraguay.
                     </p>
-                    <a href="{{ route('proyectos') }}" class="btn btn-primary mt-3">Ver Proyectos</a>
+                    <a href="{{ route('proyectos') }}" class="btn btn-primary mt-3">Ver Proyectos y Logros</a>
                 </div>
                 <div class="col-lg-6">
                     <img src="https://fundacionprodigio.org/wp-content/uploads/2024/07/coi-compress.jpg" class="img-fluid rounded-3 shadow-lg" alt="Instalaciones del Centro Odontológico Integral">
@@ -85,6 +85,7 @@
             </div>
         </div>
     </section>
+    @include('pages.partials.testimonios')
 
     {{-- NUEVA SECCIÓN: "Cómo Ayudar" (Call to Action) --}}
      <section id="ayudar" class="py-5 bg-white">
@@ -118,7 +119,7 @@
         </div>
     </section>
 
-    {{-- Services Section --}}  
+    {{-- Services Section --}}      
     @include('pages.partials.services')
     @include('pages.partials.about')
     @include('pages.partials.impact')

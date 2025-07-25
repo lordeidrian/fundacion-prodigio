@@ -58,4 +58,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if(counterSection) {
         observer.observe(counterSection.parentElement.parentElement.parentElement);
     }
+    
 });
