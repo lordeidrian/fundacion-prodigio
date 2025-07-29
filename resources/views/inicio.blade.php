@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Inicio - DentalHope Hub')
+@section('title', 'Inicio - Fundación Prodigio')
 
 @section('content')
     {{-- Hero Section --}}    
@@ -8,11 +8,11 @@
         <div class="container d-flex align-items-center">
             <div class="row">
                 <div class="col-lg-8 text-white">
-                    <h1 class="display-3 fw-bold mb-4">Un Futuro Brillante Comienza Hoy</h1>
-                    <p class="lead mb-5">
+                    <h1 class="display-3 fw-bold mb-4 animate-on-load">Un Futuro Brillante Comienza Hoy</h1>
+                    <p class="lead mb-5 animate-on-load delay-1">
                         Cada donación, cada hora de voluntariado, cada proyecto, construye un camino de esperanza para quienes más lo necesitan. Únete a nuestra causa.
                     </p>
-                    <a href="#donar" class="btn btn-outline-light btn-lg">Quiero Ayudar</a>
+                    <a href="#donar" class="btn btn-outline-light btn-lg animate-on-load delay-2">Ver más</a>
                 </div>
             </div>
         </div>

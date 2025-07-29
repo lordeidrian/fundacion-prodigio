@@ -508,3 +508,31 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
 .whatsapp-btn i, .scroll-to-top-btn i {
     color: #FFFFFF;
 }
+/* --- Animación de Entrada para el Hero --- */
+
+/* 1. Define la animación: desvanecer y subir */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 2. Clase principal que aplica la animación */
+.animate-on-load {
+  opacity: 0; /* Oculta el elemento antes de la animación */
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+/* 3. Clases para el retraso escalonado */
+.animate-on-load.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.animate-on-load.delay-2 {
+  animation-delay: 0.4s;
+}
