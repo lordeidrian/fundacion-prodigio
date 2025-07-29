@@ -4,8 +4,8 @@
 
 @section('content')
     {{-- Hero Section --}}    
-    <div class="hero-gradient-overlay" style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.85), rgba(0, 123, 255, 0.7)), url('{{ asset('images/banner-4.jpg') }}');">
-        <div class="container d-flex align-items-center min-vh-100">
+    <div class="hero-gradient-overlay" style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.7), rgba(0, 123, 255, 0.65)), url('{{ asset('images/banner-4.jpg') }}');">
+        <div class="container d-flex align-items-center">
             <div class="row">
                 <div class="col-lg-8 text-white">
                     <h1 class="display-3 fw-bold mb-4">Un Futuro Brillante Comienza Hoy</h1>
@@ -17,8 +17,11 @@
             </div>
         </div>
         {{-- Separador de Forma --}}    
-        <!-- Degradado de fusión solo en mobile -->
-        <div class="hero-fade-bottom d-block d-lg-none"></div>
+        <div class="hero-shape-divider hero-shape-divider d-none d-lg-block">
+            <svg class="d-none d-lg-block" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style="width: 100%; height: 142px;">
+            <path d="M0,0 C300,100 900,0 1200,100 V120 H0 Z" class="shape-fill"></path>
+            </svg>
+        </div>
     </div>
 
     {{-- Header Section --}}

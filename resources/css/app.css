@@ -1,15 +1,3 @@
-@media (max-width: 991.98px) {
-  .hero-fade-bottom {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(to bottom, #fff 0%, rgba(29,69,107,0.85) 100%);
-    pointer-events: none;
-    z-index: 2;
-  }
-}
 /* resources/css/app.css */
 
 /* =================================================================== */
@@ -30,9 +18,19 @@ html, body {
     --bs-primary-rgb: 109, 59, 255;
     --bs-secondary: #F7FAFC; /* Light gray */
     --bs-accent: #FF7A59; /* Coral orange */
-    --bs-body-font-family: 'Inter', sans-serif;
+    --font-headings: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+    --bs-body-font-family: 'Source Sans 3', sans-serif; /* Fuente para el cuerpo */
     --background: 210 40% 98%;   /* HSL para un gris muy claro/blanco azulado */
     --secondary: 210 40% 91%;    /* HSL para un gris claro ligeramente más oscuro */
+}
+body {
+    font-family: var(--font-body);
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
+    font-family: var(--font-headings);
+    font-weight: 700;
 }
 /* Clases para fondos de sección */
 .footer-bg-default {
@@ -168,38 +166,24 @@ html, body {
 
 /* Solo se aplica en pantallas de hasta 991px de ancho */
 @media (max-width: 991.98px) {
+    /* 1. Ocultamos el div que contiene la curva SVG */
+    .hero-shape-divider {
+        display: none;
+    }
 
-    /* 1. Prepara el hero para que se quede detrás */
+    /* 2. Reducimos la altura del hero en móvil */
     .hero-gradient-overlay {
-        position: relative;
-        z-index: 1;
+        padding-bottom: 0;
+        min-height: 70vh !important; /* Mucho más compacto en móvil */
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Centra el contenido vertical y horizontalmente */
     }
-
-    /* 2. Posiciona el nuevo div contenedor */
-    .fusionado {
-        position: relative; /* Clave para que el ::before funcione */
-        z-index: 2; /* Lo pone por encima del hero */
-
-        /* Sube el contenedor para que invada el espacio del hero */
-        margin-top: -150px;
-    }
-
-    /* 3. Crea el degradado que se fusiona */
-    .fusionado::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100px; /* Coincide con el margen negativo */
-        
-        /* El degradado que va de transparente (arriba) a blanco (abajo) */
-        background: linear-gradient(to bottom, rgba(29,69,107,0.85) 0%, #fff 100%);
-    }
-    
-    /* 4. Asegura que el fondo de tu sección original no interfiera */
-    .fusionado #causa {
-        background-color: transparent !important; /* Anula el bg-white */
+    .hero-gradient-overlay > .container {
+        align-items: flex-start !important;
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+        min-height: unset !important;
     }
 }
 /* =================================================================== */
