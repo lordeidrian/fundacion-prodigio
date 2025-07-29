@@ -3,21 +3,27 @@
 @section('title', 'Inicio - DentalHope Hub')
 
 @section('content')
-    {{-- Hero Section --}}
-    <section id="home" class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: url('{{ asset('images/banner-4.jpg') }}') center center / cover no-repeat;">
-        <div class="container z-2">
-            <h1 class="display-3 fw-bold text-primary font-headline">Brightening Lives, One Smile at a Time</h1>
-            <p class="lead text-dark my-4 mx-auto" style="max-width: 700px;">
-                DentalHope Hub is dedicated to providing essential dental care to underserved communities, ensuring everyone has a reason to smile.
-            </p>
-            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                <a href="#contribute" class="btn btn-primary btn-lg px-4 gap-3 shadow">Get Involved</a>
-                <a href="#services" class="btn btn-outline-light btn-lg px-4">Our Services</a>
+    {{-- Hero Section --}}    
+    <div class="hero-gradient-overlay" style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.85), rgba(0, 123, 255, 0.7)), url('{{ asset('images/banner-4.jpg') }}');">
+        <div class="container d-flex align-items-center min-vh-100">
+            <div class="row">
+                <div class="col-lg-8 text-white">
+                    <h1 class="display-3 fw-bold mb-4">Un Futuro Brillante Comienza Hoy</h1>
+                    <p class="lead mb-5">
+                        Cada donación, cada hora de voluntariado, cada proyecto, construye un camino de esperanza para quienes más lo necesitan. Únete a nuestra causa.
+                    </p>
+                    <a href="#donar" class="btn btn-outline-light btn-lg">Quiero Ayudar</a>
+                </div>
             </div>
         </div>
-    </section>
+        {{-- Separador de Forma --}}    
+        <!-- Degradado de fusión solo en mobile -->
+        <div class="hero-fade-bottom d-block d-lg-none"></div>
+    </div>
+
+    {{-- Header Section --}}
     {{-- NUEVA SECCIÓN: "Nuestra Causa" con Tarjetas --}}
-    <section id="causa" class="py-5 bg-white">
+    <section id="causa" class="py-5 bg-white fusionado">
         <div class="container my-5">
             <div class="row text-center">
                 <div class="col-12">
