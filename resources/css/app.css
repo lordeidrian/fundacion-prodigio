@@ -536,3 +536,16 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
 .animate-on-load.delay-2 {
   animation-delay: 0.4s;
 }
+/* 1. Para el menú de Escritorio (el que está centrado) */
+.menu-centrado-viewport .nav-link {
+    /* !! ATENCIÓN: Reemplaza 'Playfair Display', serif con la fuente exacta de tu botón !! */
+    font-family: var(--font-headings);
+    font-weight: 700;
+}
+
+/* 2. Para el menú Móvil (el que se despliega) */
+.offcanvas-body .nav-link {
+    /* !! ATENCIÓN: Usa la misma fuente que arriba !! */
+    font-family: var(--font-headings);
+    font-weight: 700;
+}

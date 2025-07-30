@@ -2,10 +2,7 @@
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <!-- Logo -->
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-primary me-2">
-                    <path d="M19.999 2.5a.5.5 0 0 0-.5.5v2.84a3.5 3.5 0 0 1-1.15 2.541l-.004.004a3.501 3.501 0 0 1-4.832 0l-.004-.004A3.5 3.5 0 0 1 12.33 5.84V3a.5.5 0 0 0-1 0v2.84a3.5 3.5 0 0 1-1.15 2.541l-.004.004a3.501 3.501 0 0 1-4.832 0l-.004-.004A3.5 3.5 0 0 1 4.16 5.84V3a.5.5 0 0 0-1 0v3.16a3.5 3.5 0 0 1 1.01 2.375V15.5a3 3 0 0 0 3 3h.5v2.5a.5.5 0 0 0 1 0V18.5h4v2.5a.5.5 0 0 0 1 0V18.5h.5a3 3 0 0 0 3-3V8.535a3.5 3.5 0 0 1 1.01-2.375V3a.5.5 0 0 0-.49-.5h.001z" />
-                </svg>
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">                
                 <span class="fw-bold fs-5 text-primary">Fundación Prodigio</span>
             </a>
 
@@ -27,9 +24,10 @@
 
 <!-- Menú Desktop centrado respecto al viewport -->
 <ul class="navbar-nav menu-centrado-viewport d-none d-lg-flex flex-row">
-    <li class="nav-item"><a class="nav-link" href="{{ route('inicio') }}">Inicio</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ route('nosotros') }}">Nosotros</a></li>
-    <li class="nav-item"><a class="nav-link" href="{{ route('proyectos') }}">Nuestro Trabajo</a></li>
+    <li class="nav-item"><a class="nav-link fw-heavy" href="{{ route('inicio') }}">Inicio</a></li>
+    <li class="nav-item"><a class="nav-link fw-heavy" href="{{ route('nosotros') }}">Nosotros</a></li>
+    <li class="nav-item"><a class="nav-link fw-heavy" href="{{ route('proyectos') }}">Nuestro Trabajo</a></li>
+    <li class="nav-item"><a class="nav-link fw-heavy" href="{{ route('noticias') }}">Noticias y Eventos</a></li>
 </ul>
 <style>
 @media (min-width: 992px) {
@@ -84,6 +82,7 @@
             <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('inicio') }}">Inicio</a></li>
             <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('nosotros') }}">Nosotros</a></li>
             <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('proyectos') }}">Nuestro Trabajo</a></li>
+            <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('noticias') }}">Noticias y Eventos</a></li>
             
         </ul>
         <a href="{{ route('contacto') }}" class="btn btn-accent text-white btn-lg mt-auto">Contacto</a>

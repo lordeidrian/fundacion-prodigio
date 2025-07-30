@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Post;
 
 use Illuminate\Http\Request;
 
@@ -9,6 +10,24 @@ class PageController extends Controller
     public function inicio() { return view('inicio'); }
     public function proyectos() { return view('proyectos'); }
     public function contacto() { return view('contacto'); }
+    public function noticias()
+    {
+        $posts = Post::latest()->paginate(9); // Obtiene los 9 posts más recientes por página
+
+        return view('noticias', [
+            'posts' => $posts
+        ]);
+    }
+
+    /**
+     * Muestra una noticia individual.
+     */
+    public function noticiaSingle(Post $post)
+    {
+        return view('noticia-single', [
+            'post' => $post
+        ]);
+    }
 
     /**
      * Muestra la página consolidada "Nosotros".
