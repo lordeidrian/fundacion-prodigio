@@ -14,7 +14,7 @@
                 </p>
 
                 {{-- Imagen Destacada --}}
-                <img src="{{ asset('storage/' . $post->image_url) }}" class="img-fluid rounded-3 shadow-lg mb-5" alt="{{ $post->title }}">
+                <img src="{{ asset('storage/' . $post->featured_image) }}" class="img-fluid rounded-3 shadow-lg mb-5" alt="{{ $post->title }}">
 
                 {{-- Contenido del Post --}}
                 <div class="post-content">

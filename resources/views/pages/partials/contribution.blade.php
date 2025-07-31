@@ -1,5 +1,5 @@
 {{-- CÓMO AYUDAR / LLAMADA A LA ACCIÓN --}}
-    <section id="ayudar" class="py-5 bg-light">
+    <section id="ayudar" class="py-5 bg-white">
         <div class="container my-5">
             <div class="text-center mb-5">
                 <h2 class="display-5 fw-bold font-headline text-dark">Súmate a Nuestra Causa</h2>

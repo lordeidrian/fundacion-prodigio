@@ -90,7 +90,7 @@
                     <img src="{{ asset('images/fundacion-equipo.jpg') }}" class="img-fluid rounded-3 shadow-lg" alt="Equipo de Fundación Prodigio en una reunión comunitaria">
                 </div>
                 <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold font-headline text-dark">Nuestra Historia y Misión</h2>
+                    <h2 class="display-5 fw-bold font-headline text-dark">¿Quiénes somos?</h2>
                     <p class="lead text-muted">
                         Fundación Prodigio nació en 2023 con un propósito claro: ser un agente de cambio para el bienestar de quienes más lo necesitan en Paraguay.
                     </p>
@@ -103,10 +103,112 @@
         </div>
     </section>
 
-    {{-- Incluir sección de testimonios si se mantiene --}}
-    @include('pages.partials.testimonios')
+    {{-- ÚLTIMAS NOTICIAS --}}
+    {{-- Muestra las últimas noticias con un enfoque en la transparencia y el impacto --}}
+    <section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Un Vistazo a Nuestro Trabajo</h2>
+            <p class="lead text-muted">Nuestra misión es transformar vidas a través de acciones concretas.</p>
+        </div>
 
-    
+        {{-- Usamos 'justify-content-center' para centrar las columnas más pequeñas --}}
+        <div class="row g-4 justify-content-center">
+            
+            {{-- Cambiamos col-lg-6 a col-lg-5 para hacerlas más compactas --}}
+            <div class="col-lg-5 col-md-6">
+                <div class="card shadow-sm h-100">
+                     <img src="{{ asset('images/embarazo-sonriente.jpg') }}" class="card-img-top" alt="Proyecto Embarazo Sonriente" style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Proyecto "Embarazo Sonriente"</h4>
+                        <p class="card-text small">Garantizamos atención odontológica gratuita a mujeres embarazadas de escasos recursos, protegiendo su salud y la de sus futuros bebés.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-md-6">
+                <div class="card shadow-sm h-100">
+                    <img src="https://fundacionprodigio.org/wp-content/uploads/2024/07/coi-compress.jpg" class="card-img-top" alt="Centro Odontológico Integral" style="height: 250px; object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="card-title fw-bold">Centro Odontológico Integral (COI)</h4>
+                        <p class="card-text small">El corazón de nuestras operaciones. Una clínica modelo con tecnología de punta para ofrecer tratamientos de excelencia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{{ route('proyectos') }}" class="btn btn-primary btn-lg">
+                Conoce más sobre nuestros proyectos
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold">Últimas Noticias y Eventos</h2>
+            <p class="lead text-muted">Mantente al día con nuestras actividades más recientes.</p>
+        </div>
+
+        @if($latestPosts->isNotEmpty())
+            <div id="carouselNoticias" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    {{-- Agrupamos los posts en chunks de 3 para el carrusel --}}
+                    @foreach($latestPosts->chunk(3) as $chunk)
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                            <div class="row g-4">
+                                @foreach($chunk as $post)
+                                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                                        <div class="card shadow-sm w-100">
+                                            <a href="{{ route('noticia.single', $post) }}">
+                                                 {{-- Usamos 'featured_image' como en tu último código --}}
+                                                <img src="{{ asset('storage/' . $post->featured_image) }}" class="card-img-top" alt="{{ $post->title }}" style="height: 220px; object-fit: cover;">
+                                            </a>
+                                            <div class="card-body text-center d-flex flex-column">
+                                                <h5 class="card-title fw-bold">
+                                                    <a href="{{ route('noticia.single', $post) }}" class="text-decoration-none text-dark stretched-link">{{ $post->title }}</a>
+                                                </h5>
+                                                <p class="card-text text-muted small mt-auto">
+                                                    <i class="bi bi-calendar-event me-1"></i> Publicado el {{ $post->created_at->format('d/m/Y') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+
+                {{-- Los botones de control del carrusel --}}
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselNoticias" data-bs-slide="prev">
+                    {{-- El ícono de la flecha ahora es más visible --}}
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.3); border-radius: 50%; padding: 1.2rem;"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselNoticias" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0, 0, 0, 0.3); border-radius: 50%; padding: 1.2rem;"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        @else
+            <div class="text-center text-muted py-5">
+                <p class="h5">Aún no hay noticias para mostrar.</p>
+            </div>
+        @endif
+
+        <div class="text-center mt-5">
+            <a href="{{ route('noticias') }}" class="btn btn-dark btn-lg">
+                Ver Todas las Entradas
+            </a>
+        </div>
+    </div>
+</section>
 
     {{-- Mantengo tu sección de contribución si aún es relevante --}}
     @include('pages.partials.contribution')

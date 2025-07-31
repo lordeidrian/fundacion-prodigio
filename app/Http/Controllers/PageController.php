@@ -7,7 +7,14 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function inicio() { return view('inicio'); }
+    public function inicio()
+    {
+        // 1. Obtenemos los 3 posts más recientes.
+        $latestPosts = Post::latest()->take(4)->get();
+
+        // 2. Pasamos los posts a la vista.
+        return view('inicio', ['latestPosts' => $latestPosts]);
+    }
     public function proyectos() { return view('proyectos'); }
     public function contacto() { return view('contacto'); }
     public function noticias()
