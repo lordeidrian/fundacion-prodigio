@@ -537,14 +537,21 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
   animation-delay: 0.4s;
 }
 /* 1. Para el menú de Escritorio (el que está centrado) */
-.menu-centrado-viewport .nav-link {
+.navbar-expand-lg .navbar-collapse .navbar-nav .nav-link.fw-heavy {
     /* !! ATENCIÓN: Reemplaza 'Playfair Display', serif con la fuente exacta de tu botón !! */
     font-family: var(--font-headings);
     font-weight: 700;
+    padding: 0.5rem 1rem !important;
+    border-bottom: 3px solid transparent;
+    transition: border-color 0.2s ease-in-out;
+}
+.navbar-expand-lg .navbar-collapse .navbar-nav .nav-link.fw-heavy:hover {
+    border-color: #4c545d73;
+    
 }
 
 /* 2. Para el menú Móvil (el que se despliega) */
-.offcanvas-body .nav-link {
+.offcanvas .offcanvas-body .navbar-nav .nav-link {
     /* !! ATENCIÓN: Usa la misma fuente que arriba !! */
     font-family: var(--font-headings);
     font-weight: 700;
