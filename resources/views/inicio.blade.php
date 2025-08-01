@@ -4,29 +4,76 @@
 
 @section('content')
 
-    {{-- HERO SECTION --}}
-    {{-- Mantiene tu estilo visual pero con un mensaje más amplio sobre la misión. --}}
-    <div class="hero-gradient-overlay" style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.8), rgba(0, 100, 210, 0.7)), url('{{ asset('images/banner-4-i.jpg') }}');">
-        <div class="container d-flex align-items-center" style="min-height: 70vh;">
-            <div class="row">
-                <div class="col-lg-9 text-white">
-                    {{-- Texto enfocado en la Misión de la Fundación --}}
-                    <h1 class="display-4 fw-bold mb-2 animate-on-load">Construyendo un futuro más saludable para Paraguay</h1>
-                    <p class="lead mb-2 animate-on-load delay-1">
-                        Impulsamos el bienestar de comunidades vulnerables, garantizando el acceso a una salud digna<br>y de calidad como un derecho fundamental para todos.
-                    </p>
-                    <a href="#ayudar" class="btn btn-primary btn-lg animate-on-load delay-2">Súmate a la causa</a>
+    {{-- HERO SECTION COMO CARRUSEL --}}
+<div id="heroCarousel" class="carousel slide position-relative" data-bs-ride="carousel" data-bs-interval="5000">
+    
+    {{-- Indicadores del carrusel --}}
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    {{-- Contenido del carrusel (las imágenes) --}}
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('{{ asset('images/banner-4-i.JPG') }}');">
+            <div class="container d-flex align-items-end pb-5 mb-5" style="min-height: 100vh;">
+                <div class="row">
+                    <div class="col-lg-9 text-gray-800">
+                        <h1 class="display-4 fw-bold mb-2">Construyendo un futuro más saludable para Paraguay</h1>
+                        <p class="lead mb-2">
+                            Impulsamos el bienestar de comunidades vulnerables, garantizando el acceso a una salud digna<br>y de calidad como un derecho fundamental para todos.
+                        </p>
+                        <a href="#compromiso" class="btn btn-primary btn-lg">Súmate a la causa</a>
+                    </div>
                 </div>
             </div>
         </div>
-        {{-- Tu separador de forma se mantiene intacto --}}
-        <div class="hero-shape-divider d-none d-lg-block">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style="width: 100%; height: 142px;">
-                <path d="M0,0 C300,100 900,0 1200,100 V120 H0 Z" class="shape-fill"></path>
-            </svg>
+        <div class="carousel-item" style="background-image: url('{{ asset('images/banner-1.png') }}');">
+             <div class="container d-flex align-items-end pb-5 mb-5" style="min-height: 100vh;">
+                <div class="row">
+                    <div class="col-lg-9 text-gray-800">
+                        <h1 class="display-4 fw-bold mb-2">Construyendo un futuro más saludable para Paraguay</h1>
+                        <p class="lead mb-2">
+                            Impulsamos el bienestar de comunidades vulnerables, garantizando el acceso a una salud digna<br>y de calidad como un derecho fundamental para todos.
+                        </p>
+                        <a href="#compromiso" class="btn btn-primary btn-lg">Súmate a la causa</a>
+                    </div>
+                </div>
+             </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('{{ asset('images/banner-2.png') }}');">
+             <div class="container d-flex align-items-end pb-5 mb-5" style="min-height: 100vh;">
+                <div class="row">
+                    <div class="col-lg-9 text-gray-800">
+                        <h1 class="display-4 fw-bold mb-2">Construyendo un futuro más saludable para Paraguay</h1>
+                        <p class="lead mb-2">
+                            Impulsamos el bienestar de comunidades vulnerables, garantizando el acceso a una salud digna<br>y de calidad como un derecho fundamental para todos.
+                        </p>
+                        <a href="#compromiso" class="btn btn-primary btn-lg">Súmate a la causa</a>
+                    </div>
+                </div>
+             </div>
         </div>
     </div>
 
+    {{-- Controles de Anterior/Siguiente --}}
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+
+    {{-- El separador de forma SVG --}}
+    <div class="hero-shape-divider d-none d-lg-block">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0 C300,100 900,0 1200,100 V120 H0 Z" class="shape-fill"></path>
+        </svg>
+    </div>
+</div>
 
     {{-- NUESTRO COMPROMISO --}}
     {{-- Usando tu estructura de tarjetas e iconos, pero con el contenido reenfocado --}}

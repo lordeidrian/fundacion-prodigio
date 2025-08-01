@@ -125,9 +125,9 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     min-height: 80px;
 }
 
-/* 5. Estilo de la sección Hero */
+/* 5. Estilo de la sección Hero (BANNER ESTÁTICO ORIGINAL) */
 .hero-gradient-overlay {
-    position: relative;    
+    position: relative;
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -141,7 +141,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     position: absolute;
     bottom: -1px;
     left: 0;
-    width: 100%;    
+    width: 100%;
     overflow: hidden;
     line-height: 0;
 }
@@ -213,7 +213,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     width: 100%;
 }
 /* =================================================================== */
-/* ESTILOS PARA LAS NUEVAS SECCIONES INTERACTIVAS                     */
+/* ESTILOS PARA LAS NUEVAS SECCIONES INTERACTIVAS                      */
 /* =================================================================== */
 
 /* Tarjetas de Valores Interactivas */
@@ -311,13 +311,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     flex-direction: column; /* Apila los botones verticalmente */
     align-items: flex-end; /* Alinea los elementos a la derecha dentro del contenedor */
     gap: 15px; /* Espacio entre los botones */
-    /* Para pantallas más pequeñas, ajusta la posición si es necesario */
-    @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+    .fixed-buttons-container {
         bottom: 20px;
         right: 20px;
         gap: 10px;
     }
 }
+
 
 /* Contenedor de los botones fijos (WhatsApp y Volver Arriba) */
 .fixed-action-buttons {
@@ -341,11 +343,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+    .button-fixed-size {
         width: 40px;
         height: 40px;
     }
 }
+
 
 .button-fixed-size:hover {
     transform: translateY(-3px);
@@ -389,19 +394,19 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     background-image: url('https://user-images.githubusercontent.com/15075759/28719142-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); /* Patrón de fondo de WhatsApp */
     background-repeat: repeat;
     background-size: 100px; /* Ajusta el tamaño del patrón si es necesario */
-
-    /* Ajustes responsivos para pantallas pequeñas */
-    @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+    .whatsapp-minichat {
         width: 100vw; /* Ocupa el 100% del ancho del viewport */
         right: 0;     /* Se alinea al borde derecho */
         left: 0;      /* Se alinea al borde izquierdo */
         bottom: 0;    /* Se posiciona en la parte inferior de la pantalla */
         border-radius: 0; /* Opcional: Quita los bordes redondeados en la parte inferior para un look de "hoja inferior" */
-        /* Si tenías algún transform: translateX(), asegúrate de que no interfiera o de quitarlo aquí */
         transform: none; /* Asegura que no haya transformaciones que lo desplacen */
         z-index: 5000;
     }
 }
+
 
 /* Clase para mostrar el mini chat */
 .whatsapp-minichat.show {
@@ -420,11 +425,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     align-items: center;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    @media (max-width: 768px) {
+}
+@media (max-width: 768px) {
+    .minichat-header-whatsapp {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
     }
 }
+
 
 .minichat-logo {
     width: 40px; /* Tamaño del logo en el header */
@@ -555,4 +563,51 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     /* !! ATENCIÓN: Usa la misma fuente que arriba !! */
     font-family: var(--font-headings);
     font-weight: 700;
+}
+
+/* =================================================================== */
+/* SOLUCIÓN DEFINITIVA PARA HERO CAROUSEL Y CURVA (01/AGO/2025)
+/* =================================================================== */
+
+/* 1. Ancho completo y eliminación del espacio superior */
+#heroCarousel {
+    /* Contrarresta el padding-top de 80px de la clase .main-content */
+    margin-top: -80px;
+
+    /* Truco para que el carrusel se salga del contenedor y ocupe todo el ancho */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+/* 2. Estilo para cada diapositiva */
+#heroCarousel .carousel-item {
+    min-height: 110vh; /* Aumentamos un poco la altura para que se vea más imponente */
+    background-size: cover;
+    background-position: center;
+}
+
+/* 3. Estilos corregidos y específicos para la curva del carrusel */
+#heroCarousel .hero-shape-divider {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: none; /* Aseguramos que no tenga rotaciones extrañas */
+}
+
+#heroCarousel .hero-shape-divider svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 142px; /* Esta es la altura que da la curva pronunciada que te gusta */
+}
+
+#heroCarousel .hero-shape-divider .shape-fill {
+    fill: #FFFFFF; /* Relleno blanco para unirse a la siguiente sección */
 }

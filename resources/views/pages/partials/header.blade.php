@@ -1,33 +1,7 @@
 <header id="main-header" class="fixed-top">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">
-                <svg width="36" height="36" viewBox="0 0 100 100" fill="none" class="me-2" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                    <linearGradient id="gold-classic" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                        <stop offset="0%" stop-color="#FFD700"/>
-                        <stop offset="60%" stop-color="#FFDE70"/>
-                        <stop offset="100%" stop-color="#B6862C"/>
-                    </linearGradient>
-                    </defs>
-                    <!-- Trazo grueso y simple de una P -->
-                    <path d="
-                    M25,85 
-                    L25,15 
-                    L60,15 
-                    Q80,15 80,40 
-                    Q80,65 60,65 
-                    L40,65 
-                    L40,85 
-                    Z
-                    M40,30 
-                    L60,30 
-                    Q70,30 70,40 
-                    Q70,50 60,50 
-                    L40,50 
-                    Z"
-                    fill="url(#gold-classic)" fill-rule="evenodd" clip-rule="evenodd"/>
-                </svg>
+            <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">                
                 <span class="fw-bold fs-5 text-primary">Fundación Prodigio</span>
             </a>
 
