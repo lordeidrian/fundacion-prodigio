@@ -17,7 +17,7 @@
     {{-- Contenido del carrusel (las imágenes) --}}
     <div class="carousel-inner">
         <div class="carousel-item active" style="background-image: url('{{ asset('images/banner-4-i.JPG') }}');">
-            <div class="container d-flex align-items-end pb-5 mb-5" style="min-height: 100vh;">
+            <div class="container d-flex align-items-center pb-5 mb-5" style="min-height: 85vh;">
                 <div class="row">
                     <div class="col-lg-9 text-gray-800">
                         <h1 class="display-4 fw-bold mb-2">Construyendo un futuro más saludable para Paraguay</h1>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="carousel-item" style="background-image: url('{{ asset('images/banner-1.png') }}');">
-             <div class="container d-flex align-items-end pb-5 mb-5" style="min-height: 100vh;">
+             <div class="container d-flex align-items-center pb-5 mb-5" style="min-height: 85vh;">
                 <div class="row">
                     <div class="col-lg-9 text-gray-800">
                         <h1 class="display-4 fw-bold mb-2">Construyendo un futuro más saludable para Paraguay</h1>
@@ -43,7 +43,7 @@
              </div>
         </div>
         <div class="carousel-item" style="background-image: url('{{ asset('images/banner-2.png') }}');">
-             <div class="container d-flex align-items-end pb-5 mb-5" style="min-height: 100vh;">
+             <div class="container d-flex align-items-center pb-5 mb-5" style="min-height: 85vh;">
                 <div class="row">
                     <div class="col-lg-9 text-gray-800">
                         <h1 class="display-4 fw-bold mb-2">Construyendo un futuro más saludable para Paraguay</h1>

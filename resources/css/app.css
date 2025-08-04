@@ -585,7 +585,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
 
 /* 2. Estilo para cada diapositiva */
 #heroCarousel .carousel-item {
-    min-height: 110vh; /* Aumentamos un poco la altura para que se vea más imponente */
+    min-height: 70vh; /* Aumentamos un poco la altura para que se vea más imponente */
     background-size: cover;
     background-position: center;
 }
