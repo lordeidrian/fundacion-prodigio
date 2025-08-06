@@ -3,44 +3,44 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeamMemberResource\Pages;
-use App\Filament\Resources\TeamMemberResource\RelationManagers;
 use App\Models\TeamMember;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TeamMemberResource extends Resource
 {
     protected static ?string $model = TeamMember::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationLabel = 'Miembros del Equipo';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('position')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\FileUpload::make('image_path')
-                    ->image()
+                    ->label('Nombre Completo')
                     ->required(),
-                Forms\Components\TextInput::make('twitter_url')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('linkedin_url')
-                    ->maxLength(255)
-                    ->default(null),
+                Forms\Components\TextInput::make('position')
+                    ->label('Cargo / Posición')
+                    ->required(),
+                Forms\Components\RichEditor::make('description')
+                    ->label('Biografía Corta')
+                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('image_path') // <-- Corregido de 'photo' a 'image_path'
+                    ->label('Fotografía')
+                    ->image()
+                    ->directory('team-photos'),
+                Forms\Components\TextInput::make('order')
+                    ->label('Orden')
+                    ->numeric()
+                    ->default(0),
+                Forms\Components\Toggle::make('is_active')
+                    ->label('Activo')
+                    ->default(true),
             ]);
     }
 
@@ -48,27 +48,13 @@ class TeamMemberResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('position')
-                    ->searchable(),
-                Tables\Columns\ImageColumn::make('image_path'),
-                Tables\Columns\TextColumn::make('twitter_url')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('linkedin_url')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\ImageColumn::make('image_path')->label('Foto'), // <-- Corregido de 'photo' a 'image_path'
+                Tables\Columns\TextColumn::make('name')->label('Nombre')->searchable(),
+                Tables\Columns\TextColumn::make('position')->label('Cargo'),
+                Tables\Columns\TextColumn::make('order')->label('Orden')->sortable(),
+                Tables\Columns\IconColumn::make('is_active')->label('Activo')->boolean(),
             ])
-            ->filters([
-                //
-            ])
+            ->defaultSort('order', 'asc')
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
@@ -77,13 +63,6 @@ class TeamMemberResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
     }
 
     public static function getPages(): array

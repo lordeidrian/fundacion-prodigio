@@ -62,12 +62,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     font-family: 'Inter', sans-serif; /* O 'Poppins' si lo prefieres */
 }
 
-.btn-primary {
+/* .btn-primary {
     --bs-btn-bg: var(--bs-primary);
     --bs-btn-border-color: var(--bs-primary);
     --bs-btn-hover-bg: #5a2fd6;
     --bs-btn-hover-border-color: #5a2fd6;
-}
+} */
 
 .btn-accent {
     --bs-btn-bg: var(--bs-accent);
@@ -555,7 +555,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
 }
 .navbar-expand-lg .navbar-collapse .navbar-nav .nav-link.fw-heavy:hover {
     border-color: #4c545d73;
-    
+
 }
 
 /* 2. Para el menú Móvil (el que se despliega) */

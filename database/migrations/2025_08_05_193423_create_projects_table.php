@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Relacionado con un usuario
+            $table->foreignId('parent_id')->nullable()->constrained('projects')->onDelete('cascade');
             $table->string('title');
-            $table->string('slug')->unique(); // Para URLs amigables
+            $table->string('slug')->unique();
+            $table->string('excerpt')->nullable();
             $table->text('content');
             $table->string('featured_image')->nullable();
-            $table->timestamp('published_at')->nullable(); // Para programar posts
+            $table->string('status')->default('published');
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('projects');
     }
 };

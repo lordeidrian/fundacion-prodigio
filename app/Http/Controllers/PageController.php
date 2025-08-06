@@ -1,89 +1,89 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Post;
 
+// 1. Importa TODOS los modelos que vas a necesitar
+use App\Models\Post;
+use App\Models\Banner;
+use App\Models\ActionPillar;
+use App\Models\PageSection;
+use App\Models\SupportMethod;
+use App\Models\Value;
+use App\Models\StrategicLine;
+use App\Models\TeamMember;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    /**
+     * Muestra la página de inicio con todos los datos dinámicos.
+     */
     public function inicio()
     {
-        // 1. Obtenemos los 3 posts más recientes.
+        // --- Cargar Banners ---
+        // Trae todos los banners activos y los ordena por el campo 'order'
+        $banners = Banner::where('is_active', true)->orderBy('order')->get();
+
+        // --- Cargar Pilares de Acción ---
+        $actionPillars = ActionPillar::where('is_active', true)->orderBy('order')->get();
+
+        // --- Cargar Métodos de Apoyo (para el partial 'contribution') ---
+        $supportMethods = SupportMethod::where('is_active', true)->orderBy('order')->get();
+
+        // --- Cargar las Secciones de Página ---
+        // Para no hacer muchas consultas, traemos todas las de la página 'inicio' de una vez
+        // y las convertimos en un formato fácil de usar: ['section_key' => $section_model]
+        $pageSectionsRaw = PageSection::where('page_name', 'inicio')->get();
+        $pageSections = $pageSectionsRaw->keyBy('section_key');
+
+        // --- Cargar Últimos Posts (tu código original) ---
         $latestPosts = Post::latest()->take(4)->get();
 
-        // 2. Pasamos los posts a la vista.
-        return view('inicio', ['latestPosts' => $latestPosts]);
+        // 2. Pasamos TODAS las variables a la vista.
+        return view('inicio', [
+            'banners' => $banners,
+            'actionPillars' => $actionPillars,
+            'supportMethods' => $supportMethods,
+            'pageSections' => $pageSections,
+            'latestPosts' => $latestPosts,
+        ]);
     }
-    public function proyectos() { return view('proyectos'); }
-    public function contacto() { return view('contacto'); }
+
+    public function contacto()
+    {
+        return view('contacto');
+    }
+
     public function noticias()
     {
-        $posts = Post::latest()->paginate(9); // Obtiene los 9 posts más recientes por página
-
-        return view('noticias', [
-            'posts' => $posts
-        ]);
+        $posts = Post::latest()->paginate(9);
+        return view('noticias', ['posts' => $posts]);
     }
 
-    /**
-     * Muestra una noticia individual.
-     */
     public function noticiaSingle(Post $post)
     {
-        return view('noticia-single', [
-            'post' => $post
-        ]);
+        return view('noticia-single', ['post' => $post]);
     }
 
     /**
      * Muestra la página consolidada "Nosotros".
-     * Define y pasa todos los datos necesarios para la vista.
+     * En el futuro, podrías hacer que $valores y $equipo también sean dinámicos.
      */
     public function nosotros()
     {
-        $valores = [
-            'Equidad' => ['desc' => 'Reducimos las desigualdades en el acceso a la salud, brindando atención gratuita a quienes más lo necesitan.', 'icon' => 'bi-arrow-down-up'],
-            'Dignidad' => ['desc' => 'Ofrecemos un trato respetuoso, humano y empático, reconociendo el valor de cada persona.', 'icon' => 'bi-person-heart'],
-            'Calidad' => ['desc' => 'Brindamos una atención odontológica con altos estándares profesionales, priorizando la seguridad y el cuidado.', 'icon' => 'bi-gem'],
-            'Compromiso Social' => ['desc' => 'Nos involucramos activamente en la transformación de la realidad de las comunidades vulnerables.', 'icon' => 'bi-people-fill'],
-            'Solidaridad' => ['desc' => 'Creemos en el poder de la cooperación y el apoyo mutuo para construir un presente justo y saludable.', 'icon' => 'bi-balloon-heart-fill'],
-            'Responsabilidad' => ['desc' => 'Actuamos con seriedad, ética y transparencia, gestionando los recursos con eficiencia.', 'icon' => 'bi-shield-check']
-        ];
+        // Cargar las secciones de la página "Nosotros"
+        $pageSections = PageSection::where('page_name', 'nosotros')->get()->keyBy('section_key');
 
-        $equipo = [
-            [
-                'nombre' => 'Ing. Ignacio Ortellado',
-                'puesto' => 'Presidente del Directorio',
-                'descripcion' => 'Empresario e Ingeniero Civil. Fundador de TOCSA S.A. Cree y practica la Responsabilidad Social Empresarial.',
-                'imagen' => 'images/ignacio-ortellado.png'
-            ],
-            [
-                'nombre' => 'Dr. Marcos Margraf',
-                'puesto' => 'Director Clínico',
-                'descripcion' => 'Odontólogo Especializado, Master y Doctorado. Director de Margraf Oral Health Group y propietario de 4 patentes.',
-                'imagen' => 'images/marcos-margraf.png'
-            ],
-            [
-                'nombre' => 'Andrés Silva',
-                'puesto' => 'Miembro del Directorio',
-                'descripcion' => 'Colabora en la dirección estratégica y supervisión de las iniciativas de la fundación.',
-                'imagen' => 'images/andres-silva.png'
-            ],
-            [
-                'nombre' => 'Fidu González',
-                'puesto' => 'Miembro del Directorio',
-                'descripcion' => 'Aporta su experiencia para guiar el crecimiento y el impacto de nuestra organización.',
-                'imagen' => 'images/fidu-gonzalez.png'
-            ],
-            [
-                'nombre' => 'Santiago García',
-                'puesto' => 'Director Ejecutivo',
-                'descripcion' => 'Responsable de la gestión diaria y la ejecución de los proyectos de la fundación.',
-                'imagen' => 'images/santiago-garcia.png'
-            ]
-        ];
+        // Cargar los valores ordenados
+        $values = Value::where('is_active', true)->orderBy('order')->get();
 
-        return view('nosotros', compact('valores', 'equipo'));
+        // Cargar las líneas estratégicas ordenadas
+        $strategicLines = StrategicLine::where('is_active', true)->orderBy('order')->get();
+
+        // Cargar los miembros del equipo ordenados
+        $teamMembers = TeamMember::where('is_active', true)->orderBy('order')->get();
+
+        // Pasar todas las colecciones de datos a la vista
+        return view('nosotros', compact('pageSections', 'values', 'strategicLines', 'teamMembers'));
     }
 }
