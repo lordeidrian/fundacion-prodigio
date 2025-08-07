@@ -15,6 +15,8 @@ class ValueResource extends Resource
     protected static ?string $model = Value::class;
     protected static ?string $navigationIcon = 'heroicon-o-sparkles';
     protected static ?string $navigationLabel = 'Valores de la Fundación';
+    protected static ?string $navigationGroup = 'Nosotros'; // Agrupación en el menú
+    protected static ?int $navigationSort = 8; // Orden en el menú
 
     public static function form(Form $form): Form
     {

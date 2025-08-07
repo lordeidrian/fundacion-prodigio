@@ -20,6 +20,8 @@ class TagResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationLabel = 'Etiquetas';
+    protected static ?int $navigationSort = 11; // Orden en el menú
 
     public static function form(Form $form): Form
     {

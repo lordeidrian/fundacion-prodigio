@@ -16,7 +16,8 @@ class ActionPillarResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-command-line';
     protected static ?string $navigationLabel = 'Pilares de Acción'; // Nombre en el menú
-
+    protected static ?string $navigationGroup = 'Inicio';
+    protected static ?int $navigationSort = 2;
     public static function form(Form $form): Form
     {
         return $form

@@ -19,6 +19,8 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Blog';
+    protected static ?string $navigationLabel = 'Categorías';
+    protected static ?int $navigationSort = 10; // Orden en el menú
 
     public static function form(Form $form): Form
     {

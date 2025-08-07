@@ -15,6 +15,8 @@ class StrategicLineResource extends Resource
     protected static ?string $model = StrategicLine::class;
     protected static ?string $navigationIcon = 'heroicon-o-map';
     protected static ?string $navigationLabel = 'Líneas Estratégicas';
+    protected static ?string $navigationGroup = 'Nosotros';
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {

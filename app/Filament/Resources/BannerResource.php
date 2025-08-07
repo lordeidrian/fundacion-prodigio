@@ -16,6 +16,8 @@ class BannerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationLabel = 'Banners'; // Nombre en el menú
+    protected static ?string $navigationGroup = 'Inicio'; // Agrupación en el menú
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

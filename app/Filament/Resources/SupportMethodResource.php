@@ -16,6 +16,8 @@ class SupportMethodResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
     protected static ?string $navigationLabel = 'Métodos de Apoyo'; // Nombre en el menú
+    protected static ?string $navigationGroup = 'Secciones';
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {

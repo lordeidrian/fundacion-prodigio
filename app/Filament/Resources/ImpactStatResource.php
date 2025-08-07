@@ -15,7 +15,8 @@
         protected static ?string $model = ImpactStat::class;
         protected static ?string $navigationIcon = 'heroicon-o-chart-bar';
         protected static ?string $navigationLabel = 'Cifras de Impacto';
-        protected static ?string $navigationGroup = 'Páginas'; // Para agrupar en el menú
+        protected static ?string $navigationGroup = 'Proyectos'; // Para agrupar en el menú
+        protected static ?int $navigationSort = 3; // Orden en el menú
 
         public static function form(Form $form): Form
         {

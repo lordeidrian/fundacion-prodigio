@@ -16,6 +16,8 @@ class TeamMemberResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'Miembros del Equipo';
+    protected static ?string $navigationGroup = 'Nosotros'; // Agrupación en el menú
+    protected static ?int $navigationSort = 7; // Orden en el menú
 
     public static function form(Form $form): Form
     {
