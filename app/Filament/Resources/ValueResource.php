@@ -17,6 +17,9 @@ class ValueResource extends Resource
     protected static ?string $navigationLabel = 'Valores de la Fundación';
     protected static ?string $navigationGroup = 'Nosotros'; // Agrupación en el menú
     protected static ?int $navigationSort = 8; // Orden en el menú
+    protected static ?string $modelLabel = 'Valor';
+    protected static ?string $pluralModelLabel = 'Valores de la Fundación';
+    protected static ?string $breadcrumb = 'Valores de la Fundación';
 
     public static function form(Form $form): Form
     {

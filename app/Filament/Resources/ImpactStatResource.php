@@ -17,6 +17,9 @@
         protected static ?string $navigationLabel = 'Cifras de Impacto';
         protected static ?string $navigationGroup = 'Proyectos'; // Para agrupar en el menú
         protected static ?int $navigationSort = 3; // Orden en el menú
+        protected static ?string $modelLabel = 'Proyecto';
+        protected static ?string $pluralModelLabel = 'Proyectos';
+        protected static ?string $breadcrumb = 'Proyectos';
 
         public static function form(Form $form): Form
         {

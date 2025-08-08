@@ -17,6 +17,9 @@ class StrategicLineResource extends Resource
     protected static ?string $navigationLabel = 'Líneas Estratégicas';
     protected static ?string $navigationGroup = 'Nosotros';
     protected static ?int $navigationSort = 6;
+    protected static ?string $modelLabel = 'Linea Estratégica';
+    protected static ?string $pluralModelLabel = 'Lineas Estratégicas';
+    protected static ?string $breadcrumb = 'Lineas Estratégicas';
 
     public static function form(Form $form): Form
     {

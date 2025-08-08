@@ -18,6 +18,9 @@ class SupportMethodResource extends Resource
     protected static ?string $navigationLabel = 'Métodos de Apoyo'; // Nombre en el menú
     protected static ?string $navigationGroup = 'Secciones';
     protected static ?int $navigationSort = 5;
+    protected static ?string $modelLabel = 'Método de Apoyo';
+    protected static ?string $pluralModelLabel = 'Métodos de Apoyo';
+    protected static ?string $breadcrumb = 'Métodos de Apoyo';
 
     public static function form(Form $form): Form
     {

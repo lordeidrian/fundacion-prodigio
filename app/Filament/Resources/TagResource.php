@@ -22,6 +22,9 @@ class TagResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $navigationLabel = 'Etiquetas';
     protected static ?int $navigationSort = 11; // Orden en el menú
+    protected static ?string $modelLabel = 'Etiqueta';
+    protected static ?string $pluralModelLabel = 'Etiquetas';
+    protected static ?string $breadcrumb = 'Etiquetas';
 
     public static function form(Form $form): Form
     {

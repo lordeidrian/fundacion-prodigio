@@ -19,6 +19,9 @@ class PostResource extends Resource
     protected static ?string $navigationLabel = 'Blog';
     protected static ?string $navigationGroup = 'Blog';
     protected static ?int $navigationSort = 9; // Orden en el menú
+    protected static ?string $modelLabel = 'Blog';
+    protected static ?string $pluralModelLabel = 'Blogs';
+    protected static ?string $breadcrumb = 'Blogs';
 
     public static function form(Form $form): Form
     {

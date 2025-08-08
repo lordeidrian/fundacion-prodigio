@@ -21,6 +21,9 @@ class CategoryResource extends Resource
     protected static ?string $navigationGroup = 'Blog';
     protected static ?string $navigationLabel = 'Categorías';
     protected static ?int $navigationSort = 10; // Orden en el menú
+    protected static ?string $modelLabel = 'Categoría';
+    protected static ?string $pluralModelLabel = 'Categorías';
+    protected static ?string $breadcrumb = 'Categorías';
 
     public static function form(Form $form): Form
     {

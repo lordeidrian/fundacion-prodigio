@@ -22,5 +22,8 @@ class Banner extends Model
         'image_path',
         'order',
         'is_active',
+        'text_color',
+        'box_color',
+        'box_opacity',
     ];
 }

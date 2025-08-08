@@ -12,6 +12,7 @@ use App\Models\Value;
 use App\Models\StrategicLine;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
+use App\Models\ContactSubmission;
 
 class PageController extends Controller
 {
@@ -48,10 +49,31 @@ class PageController extends Controller
             'latestPosts' => $latestPosts,
         ]);
     }
-
     public function contacto()
     {
-        return view('contacto');
+        // --- INICIO DE LA CORRECCIÓN ---
+        // Cambiamos whereIn('slug', ...) por where('section_key', ...)
+        $pageSections = PageSection::where('section_key', 'informacion_contacto')
+            ->get()
+            ->keyBy('section_key'); // Lo agrupamos por la misma clave para que la vista funcione
+        // --- FIN DE LA CORRECCIÓN ---
+
+        // Pasamos los datos a la vista
+        return view('contacto', compact('pageSections'));
+    }
+
+    public function submitContact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        ContactSubmission::create($validated);
+
+        return back()->with('success', '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
     }
 
     public function noticias()

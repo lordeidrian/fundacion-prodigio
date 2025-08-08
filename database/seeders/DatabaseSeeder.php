@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
         // NosotrosPageSeeder::class,
         // ProjectsPageSeeder::class,
         // ImpactStatSeeder::class,
-        BlogSeeder::class,
+        // BlogSeeder::class,
+        ContactPageSeeder::class,
 
     ]);
     }

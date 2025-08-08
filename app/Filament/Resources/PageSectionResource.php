@@ -22,6 +22,9 @@ class PageSectionResource extends Resource
     protected static ?string $navigationLabel = 'Secciones de Página';
     protected static ?string $navigationGroup = 'Secciones';
     protected static ?int $navigationSort = 4;
+    protected static ?string $modelLabel = 'Sección de Página';
+    protected static ?string $pluralModelLabel = 'Secciones de Página';
+    protected static ?string $breadcrumb = 'Secciones de Página';
     public static function form(Form $form): Form
     {
         return $form

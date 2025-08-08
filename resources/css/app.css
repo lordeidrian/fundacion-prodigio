@@ -32,6 +32,27 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     font-family: var(--font-headings);
     font-weight: 700;
 }
+.hero-text-box {
+  /* Usamos las variables CSS que definimos en el style del div */
+  background: rgba(var(--box-rgb), var(--box-opacity));
+  color: var(--text-color);
+
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+.hero-text-box h1,
+.hero-text-box p {
+    color: var(--text-color);
+}
+
+/* Opcional: añade una sombra suave para darle más profundidad */
+.hero-text-box {
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
 /* Clases para fondos de sección */
 .footer-bg-default {
     background-color: #1A1A1A; /* Usa el color --background */

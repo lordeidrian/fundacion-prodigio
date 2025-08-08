@@ -19,16 +19,36 @@
             <div class="carousel-inner">
                 @foreach($banners as $banner)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{ asset('storage/' . $banner->image_path) }}');">
-                        <div class="container d-flex align-items-center pb-5 mb-5" style="min-height: 85vh;">
+                        <div class="container d-flex align-items-center" style="min-height: 85vh;">
                             <div class="row">
-                                <div class="col-lg-9 text-gray-800">
-                                    <h1 class="display-4 fw-bold mb-2">{{ $banner->title }}</h1>
-                                    <p class="lead mb-2">
-                                        {!! nl2br(e($banner->subtitle)) !!}
-                                    </p>
-                                    @if($banner->button_text && $banner->button_link)
-                                        <a href="{{ $banner->button_link }}" class="btn btn-primary btn-lg">{{ $banner->button_text }}</a>
-                                    @endif
+                                <div class="col-lg-8">
+
+                                    {{-- ================================================ --}}
+                                    {{-- INICIO DE LA MODIFICACIÓN DINÁMICA --}}
+                                    {{-- ================================================ --}}
+
+                                    @php
+                                        // 1. Obtenemos los valores de la BD con fallbacks por si acaso.
+                                        $textColor = $banner->text_color ?? '#FFFFFF';
+                                        $boxRgb = hex2rgb($banner->box_color ?? '#000000');
+                                        $boxOpacity = $banner->box_opacity ?? 0.25;
+                                    @endphp
+
+                                    {{-- 2. Aplicamos los valores como variables CSS en el estilo del div. --}}
+                                    <div class="hero-text-box" style="--text-color: {{ $textColor }}; --box-rgb: {{ $boxRgb }}; --box-opacity: {{ $boxOpacity }};">
+                                        <h1 class="fw-bold mb-3">{{ $banner->title }}</h1>
+                                        <p class="fs-6 mb-4">
+                                            {!! nl2br(e($banner->subtitle)) !!}
+                                        </p>
+                                        @if($banner->button_text && $banner->button_link)
+                                            <a href="{{ $banner->button_link }}" class="btn btn-primary btn-lg">{{ $banner->button_text }}</a>
+                                        @endif
+                                    </div>
+
+                                    {{-- ================================================ --}}
+                                    {{-- FIN DE LA MODIFICACIÓN --}}
+                                    {{-- ================================================ --}}
+
                                 </div>
                             </div>
                         </div>

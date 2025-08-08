@@ -44,6 +44,11 @@ class AdminPanelProvider extends PanelProvider
                 LatestPostsWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
+            ->renderHook(
+                'panels::head.end',
+                fn () => view('filament.custom-head'),
+            )
+
             // ->sidebarCollapsibleOnDesktop()
             ->middleware([
                 EncryptCookies::class,

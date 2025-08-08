@@ -9,15 +9,21 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
+use App\Filament\Forms\Components\CustomIconPicker; // Mantenemos el componente simplificado
 
 class ActionPillarResource extends Resource
 {
     protected static ?string $model = ActionPillar::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-command-line';
-    protected static ?string $navigationLabel = 'Pilares de Acción'; // Nombre en el menú
+    protected static ?string $navigationLabel = 'Pilares de Acción';
     protected static ?string $navigationGroup = 'Inicio';
     protected static ?int $navigationSort = 2;
+    protected static ?string $modelLabel = 'Pilar de Acción';
+    protected static ?string $pluralModelLabel = 'Pilares de Acción';
+    protected static ?string $breadcrumb = 'Pilares de Acción';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -25,15 +31,19 @@ class ActionPillarResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label('Título del Pilar')
                     ->required()
-                    ->maxLength(255)
-                    ->columnSpanFull(), // Ocupa todo el ancho
+                    ->columnSpanFull(),
                 Forms\Components\RichEditor::make('description')
                     ->label('Descripción')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('icon')
-                    ->label('Ícono (Opcional)')
-                    ->helperText('Ej: nombre de clase de FontAwesome, o ruta a un ícono.'),
+
+                // Usamos nuestro componente simplificado
+                CustomIconPicker::make('icon')
+                    ->label('Ícono')
+                    // 'live()' es importante para que la previsualización funcione
+                    ->live()
+                    ->columnSpanFull(),
+
                 Forms\Components\TextInput::make('order')
                     ->label('Orden')
                     ->numeric()
@@ -49,6 +59,21 @@ class ActionPillarResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label('Título')->searchable(),
+
+                // --- CORRECCIÓN EN LA COLUMNA DE ÍCONO ---
+                Tables\Columns\TextColumn::make('icon')
+                    ->label('Ícono')
+                    ->html()
+                    ->formatStateUsing(function (?string $state): HtmlString {
+                        // Verificamos si hay un ícono antes de mostrarlo
+                        if (empty($state)) {
+                            return new HtmlString('');
+                        }
+                        // Corregido: ya no añade 'bi-' dos veces
+                        return new HtmlString("<div style='text-align: center;'><i class='bi {$state}' style='font-size: 1.5rem;'></i></div>");
+                    }),
+                // --- FIN DE LA CORRECCIÓN ---
+
                 Tables\Columns\TextColumn::make('order')->label('Orden')->sortable(),
                 Tables\Columns\IconColumn::make('is_active')->label('Activo')->boolean(),
             ])
@@ -63,7 +88,7 @@ class ActionPillarResource extends Resource
             ]);
     }
 
-    // No necesitas tocar el resto del archivo
+    // El resto del archivo no necesita cambios...
     public static function getRelations(): array { return []; }
     public static function getPages(): array
     {

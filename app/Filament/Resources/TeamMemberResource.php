@@ -18,6 +18,9 @@ class TeamMemberResource extends Resource
     protected static ?string $navigationLabel = 'Miembros del Equipo';
     protected static ?string $navigationGroup = 'Nosotros'; // Agrupación en el menú
     protected static ?int $navigationSort = 7; // Orden en el menú
+    protected static ?string $modelLabel = 'Miembro';
+    protected static ?string $pluralModelLabel = 'Miembros del Equipo';
+    protected static ?string $breadcrumb = 'Miembros del Equipo';
 
     public static function form(Form $form): Form
     {

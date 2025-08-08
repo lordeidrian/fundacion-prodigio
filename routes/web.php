@@ -3,28 +3,35 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProjectController;
-use App\Models\Post;
 use App\Http\Controllers\BlogController;
 
-// --- Rutas Principales ---
-Route::get('/', function () {
-    // 1. Se obtienen los posts
-    $posts = Post::latest()
-                   ->take(3)
-                   ->get();
+/*
+|--------------------------------------------------------------------------
+| Rutas Web
+|--------------------------------------------------------------------------
+| Aquí es donde puedes registrar las rutas web para tu aplicación.
+*/
 
-    // 2. Se pasan los posts a la vista con el nombre 'latestPosts'
-    return view('inicio', ['latestPosts' => $posts]);
-});
-// --- Rutas Principales ---
+// --- Rutas de Páginas Estáticas ---
 Route::get('/', [PageController::class, 'inicio'])->name('inicio');
 Route::get('/nosotros', [PageController::class, 'nosotros'])->name('nosotros');
+
+// --- RUTA FALTANTE AÑADIDA AQUÍ ---
 Route::get('/contacto', [PageController::class, 'contacto'])->name('contacto');
 
+// --- Ruta para procesar el envío del formulario de contacto ---
+Route::post('/contacto', [PageController::class, 'submitContact'])->name('contact.submit');
+
+
 // --- Rutas para Proyectos ---
-Route::get('/nuestro-trabajo', [ProjectController::class, 'index'])->name('proyectos.index');
-Route::get('/nuestro-trabajo/{project:slug}', [ProjectController::class, 'show'])->name('proyectos.show');
+Route::prefix('nuestro-trabajo')->name('proyectos.')->group(function () {
+    Route::get('/', [ProjectController::class, 'index'])->name('index');
+    Route::get('/{project:slug}', [ProjectController::class, 'show'])->name('show');
+});
+
 
 // --- Rutas para el Blog (Noticias y Eventos) ---
-Route::get('/blog', [BlogController::class, 'index'])->name('noticias.index');
-Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('noticia.single');
+Route::prefix('blog')->name('noticias.')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('index');
+    Route::get('/{post:slug}', [BlogController::class, 'show'])->name('single');
+});
