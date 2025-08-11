@@ -7,8 +7,6 @@ use App\Models\PageSection;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
-use Illuminate\Support\Str;
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,11 +18,12 @@ class PageSectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationLabel = 'Secciones de Página';
-    protected static ?string $navigationGroup = 'Secciones';
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Contenido Web'; // Renombrado para más claridad
+    protected static ?int $navigationSort = 1;
     protected static ?string $modelLabel = 'Sección de Página';
     protected static ?string $pluralModelLabel = 'Secciones de Página';
     protected static ?string $breadcrumb = 'Secciones de Página';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -34,53 +33,51 @@ class PageSectionResource extends Resource
                     ->disabled()
                     ->dehydrated(),
 
-                // --- CAMPOS CON VISIBILIDAD CONDICIONAL ACTUALIZADA ---
+                // --- INICIO DE CAMPOS CONDICIONALES ---
 
                 Forms\Components\TextInput::make('content.title')
                     ->label('Título de la Sección')
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), [
-                        // Claves de 'inicio'
                         'pilares_accion', 'quienes_somos', 'vistazo_trabajo', 'ultimas_noticias', 'sumate_causa',
-                        // Claves de 'nosotros'
-                        'hero', 'historia_mision', 'vision_estrategia', 'valores', 'equipo', 'cta'
+                        'hero', 'historia_mision', 'vision_estrategia', 'valores', 'equipo', 'cta',
+                        'impacto', 'alianzas' // <-- Añadido de "proyectos"
                     ])),
 
                 Forms\Components\TextInput::make('content.subtitle')
                     ->label('Subtítulo / Texto Corto')
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), [
-                        // Claves de 'inicio'
                         'pilares_accion', 'quienes_somos', 'vistazo_trabajo', 'ultimas_noticias',
-                        // Claves de 'nosotros'
-                        'hero', 'valores', 'equipo', 'cta'
+                        'hero', 'valores', 'equipo', 'cta',
+                        'impacto', 'alianzas' // <-- Añadido de "proyectos"
                     ])),
 
-                // Campo "Lead Text" para las secciones de historia y visión
                 Forms\Components\Textarea::make('content.lead_text')
                     ->label('Texto de Introducción (Lead)')
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), ['historia_mision', 'vision_estrategia'])),
 
-                // Campo "Main Text" para las secciones de historia y visión
                 Forms\Components\RichEditor::make('content.main_text')
                     ->label('Texto Principal')
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), ['historia_mision', 'vision_estrategia'])),
 
-                // Campo "Mission Title"
+                Forms\Components\RichEditor::make('content.text')
+                    ->label('Texto General / Párrafo')
+                    ->columnSpanFull()
+                    ->visible(fn (Get $get): bool => in_array($get('section_key'), ['quienes_somos', 'sumate_causa'])),
+
                 Forms\Components\TextInput::make('content.mission_title')
                     ->label('Título de Misión')
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => $get('section_key') === 'historia_mision'),
 
-                // Campo "Mission Text"
                 Forms\Components\RichEditor::make('content.mission_text')
                     ->label('Texto de Misión')
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => $get('section_key') === 'historia_mision'),
 
-                // Campo "Strategy Title"
                 Forms\Components\TextInput::make('content.strategy_title')
                     ->label('Título de Líneas Estratégicas')
                     ->columnSpanFull()
@@ -89,7 +86,6 @@ class PageSectionResource extends Resource
                 Forms\Components\FileUpload::make('content.image_path')
                     ->label('Imagen de la Sección')
                     ->image()->directory('page-sections')
-                    ->getUploadedFileNameForStorageUsing(fn (TemporaryUploadedFile $file): string => Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME)) . '-' . time() . '.' . $file->getClientOriginalExtension())
                     ->columnSpanFull()
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), ['quienes_somos', 'hero', 'historia_mision'])),
 
@@ -100,6 +96,27 @@ class PageSectionResource extends Resource
                 Forms\Components\TextInput::make('content.button_link')
                     ->label('Enlace del Botón (URL o ruta interna)')
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), ['quienes_somos', 'cta'])),
+
+                // --- CAMPOS AÑADIDOS PARA 'informacion_contacto' ---
+                Forms\Components\TextInput::make('content.address')
+                    ->label('Dirección')
+                    ->columnSpanFull()
+                    ->visible(fn (Get $get): bool => $get('section_key') === 'informacion_contacto'),
+
+                Forms\Components\TextInput::make('content.email')
+                    ->label('Correo Electrónico')
+                    ->email()
+                    ->visible(fn (Get $get): bool => $get('section_key') === 'informacion_contacto'),
+
+                Forms\Components\TextInput::make('content.phone')
+                    ->label('Teléfono')
+                    ->tel()
+                    ->visible(fn (Get $get): bool => $get('section_key') === 'informacion_contacto'),
+
+                Forms\Components\TextInput::make('content.map_coordinates')
+                    ->label('Coordenadas del Mapa (lat,lng)')
+                    ->visible(fn (Get $get): bool => $get('section_key') === 'informacion_contacto'),
+
             ]);
     }
 
@@ -108,18 +125,12 @@ class PageSectionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('section_key')->label('Identificador de Sección')->searchable(),
-                Tables\Columns\TextColumn::make('page_name')->label('Página'),
+                Tables\Columns\TextColumn::make('page_name')->label('Página')->badge(),
             ])
             ->filters([
                 SelectFilter::make('page_name')
                     ->label('Filtrar por Página')
-                    ->options([
-                        'inicio' => 'Inicio',
-                        'nosotros' => 'Nosotros',
-                        'proyectos' => 'Proyectos',
-                        'noticias' => 'Noticias',
-                        'contacto' => 'Contacto',
-                    ])
+                    ->options(fn (): array => PageSection::query()->pluck('page_name', 'page_name')->all())
             ])
             ->actions([Tables\Actions\EditAction::make(),])
             ->bulkActions([]);
@@ -127,6 +138,7 @@ class PageSectionResource extends Resource
 
     public static function canCreate(): bool { return false; }
     public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool { return false; }
+
     public static function getPages(): array
     {
         return [
