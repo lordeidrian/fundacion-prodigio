@@ -194,12 +194,12 @@
                                     @foreach($chunk as $post)
                                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                                             <div class="card shadow-sm w-100">
-                                                <a href="{{ route('noticia.single', $post) }}">
+                                                <a href="{{ route('noticias.single', $post) }}">
                                                    <img src="{{ asset('storage/' . $post->featured_image) }}" class="card-img-top" alt="{{ $post->title }}" style="height: 220px; object-fit: cover;">
                                                 </a>
                                                 <div class="card-body text-center d-flex flex-column">
                                                     <h5 class="card-title fw-bold">
-                                                        <a href="{{ route('noticia.single', $post) }}" class="text-decoration-none text-dark stretched-link">{{ $post->title }}</a>
+                                                        <a href="{{ route('noticias.single', $post) }}" class="text-decoration-none text-dark stretched-link">{{ $post->title }}</a>
                                                     </h5>
                                                     <p class="card-text text-muted small mt-auto">
                                                         <i class="bi bi-calendar-event me-1"></i> Publicado el {{ $post->created_at->format('d/m/Y') }}

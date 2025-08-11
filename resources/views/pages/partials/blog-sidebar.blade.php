@@ -12,7 +12,7 @@
         <div class="card-header bg-dark text-white"><strong>Recientes</strong></div>
         <div class="list-group list-group-flush">
             @foreach($recentPosts as $recent)
-                <a href="{{ route('noticia.single', $recent->slug) }}" class="list-group-item list-group-item-action">{{ $recent->title }}</a>
+                <a href="{{ route('noticias.single', $recent->slug) }}" class="list-group-item list-group-item-action">{{ $recent->title }}</a>
             @endforeach
         </div>
     </div>

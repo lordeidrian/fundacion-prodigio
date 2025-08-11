@@ -17,7 +17,7 @@
                     @forelse ($posts as $post)
                         <div class="col-md-6">
                             <div class="card h-100 shadow-sm border-0 card-hover-interactive">
-                                <a href="{{ route('noticia.single', $post->slug) }}">
+                                <a href="{{ route('noticias.single', $post->slug) }}">
                                     <img src="{{ asset('storage/' . $post->featured_image) }}" class="card-img-top" alt="{{ $post->title }}" style="height: 200px; object-fit: cover;">
                                 </a>
                                 <div class="card-body d-flex flex-column">
@@ -27,7 +27,7 @@
                                     <h5 class="card-title fw-bold font-headline">{{ $post->title }}</h5>
                                     <p class="card-text text-muted small mb-3"><i class="bi bi-calendar-event"></i> {{ $post->created_at->format('d/m/Y') }}</p>
                                     <p class="card-text text-muted flex-grow-1">{{ $post->excerpt }}</p>
-                                    <a href="{{ route('noticia.single', $post->slug) }}" class="btn btn-primary mt-auto align-self-start">Leer más</a>
+                                    <a href="{{ route('noticias.single', $post->slug) }}" class="btn btn-primary mt-auto align-self-start">Leer más</a>
                                 </div>
                             </div>
                         </div>
