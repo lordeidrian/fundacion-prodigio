@@ -58,7 +58,6 @@ class BannerResource extends Resource
                             ->directory('banners')
                             ->preserveFilenames()
                             ->image() // Mantenemos la validación de imagen
-                            ->quality(95)
                             ->required(),
                             //->columnSpanFull(), // Ocupa todo el ancho
 
