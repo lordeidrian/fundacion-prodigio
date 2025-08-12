@@ -9,34 +9,50 @@
                  background-position: center center; background-size: cover; background-repeat: no-repeat;">
         <div class="container py-5 text-center text-white">
             @if($project->parent)
-                <a href="{{ route('proyectos.show', $project->parent->slug) }}" class="text-white-50 text-decoration-none d-block mb-2"><i class="bi bi-arrow-left-short"></i> Parte de: {{ $project->parent->title }}</a>
+                <a href="{{ route('proyectos.show', $project->parent->slug) }}" class="text-white-50 text-decoration-none d-block mb-2">
+                    <i class="bi bi-arrow-left-short"></i> Parte de: {{ $project->parent->title }}
+                </a>
             @else
-                <a href="{{ route('proyectos.index') }}" class="text-white-50 text-decoration-none d-block mb-2"><i class="bi bi-arrow-left-short"></i> Volver a Nuestro Trabajo</a>
+                <a href="{{ route('proyectos.index') }}" class="text-white-50 text-decoration-none d-block mb-2">
+                    <i class="bi bi-arrow-left-short"></i> Volver a Nuestro Trabajo
+                </a>
             @endif
             <h1 class="display-4 fw-bold">{{ $project->title }}</h1>
             <p class="lead">{{ $project->excerpt }}</p>
         </div>
     </div>
 
-    {{-- CONTENIDO DEL PROYECTO SIN SIDEBAR --}}
+    {{-- CONTENIDO DEL PROYECTO --}}
     <section class="py-5 bg-light">
         <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="bg-white p-4 p-md-5 rounded shadow-sm">
-                        <div class="project-content">{!! $project->content !!}</div>
+
+                    {{-- CUERPO DEL PROYECTO --}}
+                    <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm mb-5">
+                        <div class="project-content content-enhanced">
+                            {!! $project->content !!}
+                        </div>
                     </div>
 
-                    {{-- SECCIÓN SEPARADA PARA IMÁGENES --}}
+                    {{-- GALERÍA DE IMÁGENES --}}
                     @php $images = $project->media->where('type', 'image'); @endphp
                     @if($images->isNotEmpty())
-                    <div class="mt-5">
-                        <h3 class="fw-bold font-headline mb-4">Galería de Imágenes</h3>
+                    <div class="mb-5">
+                        <h3 class="fw-bold font-headline mb-4">
+                            <i class="bi bi-images me-2"></i>Galería de Imágenes
+                        </h3>
                         <div class="row g-4">
                             @foreach($images as $image_item)
-                                <div class="col-md-4">
-                                    <a href="{{ asset('storage/' . $image_item->path) }}" data-lightbox="project-gallery" data-title="{{ $image_item->caption }}">
-                                        <img src="{{ asset('storage/' . $image_item->path) }}" class="img-fluid rounded shadow-sm hover-lift" alt="{{ $image_item->caption ?? 'Galería de imagen' }}">
+                                <div class="col-sm-6 col-md-4">
+                                    <a href="{{ asset('storage/' . $image_item->path) }}"
+                                       data-lightbox="project-gallery"
+                                       data-title="{{ $image_item->caption }}"
+                                       class="d-block rounded overflow-hidden shadow-sm position-relative">
+                                        <img src="{{ asset('storage/' . $image_item->path) }}"
+                                             class="img-fluid"
+                                             alt="{{ $image_item->caption ?? 'Galería de imagen' }}"
+                                             style="object-fit: cover; height: 230px; width: 100%; transition: transform .3s ease;">
                                     </a>
                                     @if($image_item->caption)
                                         <p class="small text-muted text-center mt-2">{{ $image_item->caption }}</p>
@@ -47,11 +63,13 @@
                     </div>
                     @endif
 
-                    {{-- SECCIÓN SEPARADA PARA VIDEOS --}}
+                    {{-- VIDEOS DEL PROYECTO --}}
                     @php $videos = $project->media->where('type', 'video'); @endphp
                     @if($videos->isNotEmpty())
-                    <div class="mt-5 pt-5 border-top">
-                        <h3 class="fw-bold font-headline mb-4">Videos del Proyecto</h3>
+                    <div class="pt-5 border-top mb-5">
+                        <h3 class="fw-bold font-headline mb-4">
+                            <i class="bi bi-camera-reels me-2"></i>Videos del Proyecto
+                        </h3>
                         <div class="row g-4">
                             @foreach($videos as $video_item)
                                 @php
@@ -60,8 +78,13 @@
                                 @endphp
                                 @if($youtube_id)
                                 <div class="col-md-6">
-                                    <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm">
-                                        <iframe src="https://www.youtube.com/embed/{{ $youtube_id }}" title="{{ $video_item->caption ?? 'Video de YouTube' }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <div class="ratio ratio-16x9 rounded-4 overflow-hidden shadow-sm">
+                                        <iframe src="https://www.youtube.com/embed/{{ $youtube_id }}"
+                                                title="{{ $video_item->caption ?? 'Video de YouTube' }}"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen
+                                                loading="lazy"></iframe>
                                     </div>
                                     @if($video_item->caption)
                                         <p class="small text-muted text-center mt-2">{{ $video_item->caption }}</p>
@@ -72,26 +95,125 @@
                         </div>
                     </div>
                     @endif
+
+                    {{-- SUB-PROYECTOS --}}
+                    @if($project->children->isNotEmpty())
+                        <div class="pt-5 border-top">
+                            <div class="text-center mb-5">
+                                <h2 class="display-5 fw-bold font-headline text-dark">Componentes del Programa</h2>
+                                <p class="text-muted">Descubre las partes que forman este proyecto.</p>
+                            </div>
+                            <div class="row g-4 justify-content-center">
+                                @foreach($project->children as $child)
+                                    <div class="col-md-6 col-lg-5">
+                                        <div class="card h-100 shadow-sm border-0 overflow-hidden rounded-4"
+                                             style="transition: transform .3s ease;">
+                                            <div class="ratio ratio-16x9">
+                                                <img src="{{ asset('storage/' . $child->featured_image) }}"
+                                                     alt="{{ $child->title }}"
+                                                     class="w-100 h-100"
+                                                     style="object-fit: cover;">
+                                            </div>
+                                            <div class="card-body p-4">
+                                                <h5 class="card-title fw-bold">{{ $child->title }}</h5>
+                                                <p class="card-text small text-muted">{{ $child->excerpt }}</p>
+                                            </div>
+                                            <div class="card-footer bg-white border-0 p-4 pt-0">
+                                                <a href="{{ route('proyectos.show', $child->slug) }}"
+                                                   class="btn btn-outline-primary w-100">Ver Componente</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
                 </div>
             </div>
-
-            {{-- MOSTRAR SUB-PROYECTOS SI EXISTEN --}}
-            @if($project->children->isNotEmpty())
-                <div class="mt-5 pt-5 border-top">
-                    <div class="text-center mb-5"><h2 class="display-5 fw-bold font-headline text-dark">Componentes del Programa</h2></div>
-                    <div class="row g-4 justify-content-center">
-                        @foreach($project->children as $child)
-                            <div class="col-md-6 col-lg-5">
-                                <div class="card h-100 shadow-sm border-0 overflow-hidden card-project hover-lift">
-                                    <img src="{{ asset('storage/' . $child->featured_image) }}" class="card-img-top" alt="{{ $child->title }}" style="height: 220px; object-fit: cover;">
-                                    <div class="card-body p-4"><h5 class="card-title fw-bold">{{ $child->title }}</h5><p class="card-text small text-muted">{{ $child->excerpt }}</p></div>
-                                    <div class="card-footer bg-white border-0 p-4 pt-0"><a href="{{ route('proyectos.show', $child->slug) }}" class="btn btn-outline-primary stretched-link">Ver Componente</a></div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
         </div>
     </section>
 @endsection
+
+@push('styles')
+<style>
+    /* Estilos solo para el contenido del proyecto */
+    .content-enhanced {
+        font-size: 1.1rem;
+        line-height: 1.9;
+        color: #333;
+    }
+
+    .content-enhanced h1,
+    .content-enhanced h2,
+    .content-enhanced h3 {
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        color: #1d456b;
+    }
+
+    .content-enhanced h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #0d6efd;
+        margin-top: .4rem;
+        border-radius: 2px;
+    }
+
+    .content-enhanced p {
+        margin-bottom: 1.2rem;
+    }
+
+    .content-enhanced ul {
+        padding-left: 1.2rem;
+        list-style: none;
+    }
+    .content-enhanced ul li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: .7rem;
+    }
+    .content-enhanced ul li::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        color: #0d6efd;
+        font-weight: bold;
+    }
+
+    .content-enhanced blockquote {
+        background: #f7faff;
+        border-left: 4px solid #0d6efd;
+        padding: 1rem 1.5rem;
+        font-style: italic;
+        border-radius: .5rem;
+        margin: 2rem 0;
+    }
+
+    .content-enhanced img {
+        max-width: 100%;
+        height: auto;
+        border-radius: .5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,.08);
+        margin: 1.5rem 0;
+    }
+
+    .content-enhanced table {
+        width: 100%;
+        margin-bottom: 1.5rem;
+        border-collapse: collapse;
+    }
+    .content-enhanced table th,
+    .content-enhanced table td {
+        padding: .75rem;
+        border: 1px solid #dee2e6;
+    }
+    .content-enhanced table th {
+        background-color: #f1f4f8;
+        font-weight: 600;
+    }
+</style>
+@endpush
