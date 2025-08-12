@@ -59,9 +59,9 @@ class BannerResource extends Resource
                             ->image()
                             ->imageEditor()
                             ->imageEditorAspectRatios(['16:9', '4:3']) // Permite seleccionar entre diferentes relaciones de aspecto
-                            ->imageEditorViewportWidth(1920) // Opcional
-                            ->imageEditorViewportHeight(1080) // Opcional
-                            ->imageEditorQuality(90), // Controla el % de calidad
+                            ->imageResizeTargetWidth('1920')
+                            ->imageResizeTargetHeight('1080')
+                            ->required(),
                         Forms\Components\Toggle::make('is_active')
                             ->label('Activo')
                             ->helperText('Si está inactivo, no se mostrará en la página.')
