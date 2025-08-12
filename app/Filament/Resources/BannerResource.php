@@ -58,8 +58,8 @@ class BannerResource extends Resource
                             ->directory('banners')
                             ->preserveFilenames()
                             ->image() // Mantenemos la validación de imagen
-                            ->required()
-                            ->columnSpanFull(), // Ocupa todo el ancho
+                            ->required(),
+                            //->columnSpanFull(), // Ocupa todo el ancho
 
                             // --- INICIO DE LA MODIFICACIÓN ---
                             Select::make('image_position')
