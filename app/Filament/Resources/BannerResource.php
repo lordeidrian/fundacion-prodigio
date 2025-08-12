@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Select;
 
 class BannerResource extends Resource
 {
@@ -49,29 +50,39 @@ class BannerResource extends Resource
                             ->maxLength(255),
                     ]),
 
-                Section::make('Imagen y Visibilidad')
-                    ->columns(2)
-                    ->schema([
-                        Forms\Components\FileUpload::make('image_path')
-                            ->label('Imagen')
+                    Section::make('Imagen y Visibilidad')
+                        ->columns(2)
+                        ->schema([
+                            Forms\Components\FileUpload::make('image_path')
+                            ->label('Imagen (sin compresión)')
                             ->directory('banners')
                             ->preserveFilenames()
-                            ->image()
-                            ->imageEditor()
-                            ->imageEditorAspectRatios(['16:9', '4:3']) // Permite seleccionar entre diferentes relaciones de aspecto
-                            ->imageResizeTargetWidth('1920')
-                            ->imageResizeTargetHeight('1080')
-                            ->required(),
-                        Forms\Components\Toggle::make('is_active')
-                            ->label('Activo')
-                            ->helperText('Si está inactivo, no se mostrará en la página.')
-                            ->default(true),
-                        Forms\Components\TextInput::make('order')
-                            ->label('Orden de aparición')
-                            ->numeric()
-                            ->default(0)
-                            ->helperText('Un número más bajo aparece primero.'),
-                    ]),
+                            ->image() // Mantenemos la validación de imagen
+                            ->required()
+                            ->columnSpanFull(), // Ocupa todo el ancho
+
+                            // --- INICIO DE LA MODIFICACIÓN ---
+                            Select::make('image_position')
+                                ->label('Punto de Enfoque de la Imagen')
+                                ->options([
+                                    'center top' => 'Arriba',
+                                    'center center' => 'Centro (Por defecto)',
+                                    'center bottom' => 'Abajo',
+                                ])
+                                ->default('center center')
+                                ->helperText('Elige qué parte de la imagen debe ser visible en el banner.')
+                                ->required(),
+                            // --- FIN DE LA MODIFICACIÓN ---
+
+                            Forms\Components\Toggle::make('is_active')
+                                ->label('Activo')
+                                ->default(true),
+                            Forms\Components\TextInput::make('order')
+                                ->label('Orden de aparición')
+                                ->numeric()
+                                ->default(0)
+                                ->helperText('Un número más bajo aparece primero.'),
+                        ]),
 
                 // --- INICIO DE LA NUEVA SECCIÓN DE ESTILOS ---
                 Section::make('Estilos del Banner')

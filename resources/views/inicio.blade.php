@@ -18,7 +18,10 @@
             {{-- Contenido del carrusel (las imágenes) --}}
             <div class="carousel-inner">
                 @foreach($banners as $banner)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{ asset('storage/' . $banner->image_path) }}');">
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{ asset('storage/' . $banner->image_path) }}');
+                    background-position: {{ $banner->image_position ?? 'center center' }};
+                    background-size: cover;
+                    background-repeat: no-repeat;">
                         <div class="container d-flex align-items-center" style="min-height: 85vh;">
                             <div class="row">
                                 <div class="col-lg-8">

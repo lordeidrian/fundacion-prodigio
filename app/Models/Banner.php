@@ -20,6 +20,7 @@ class Banner extends Model
         'button_text',
         'button_link',
         'image_path',
+        'image_position',
         'order',
         'is_active',
         'text_color',
