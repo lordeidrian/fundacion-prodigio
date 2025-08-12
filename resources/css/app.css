@@ -36,6 +36,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
   /* Usamos las variables CSS que definimos en el style del div */
   background: rgba(var(--box-rgb), var(--box-opacity));
   color: var(--text-color);
+  padding: clamp(12px, 2vw, 24px);
+  border-radius: 12px;
+  display: inline-block;           /* evita que se expanda a todo el ancho */
+  max-width: min(48ch, 90%);
 
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
@@ -49,9 +53,13 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, .btn {
     color: var(--text-color);
 }
 
+.hero-text-box .btn{
+  font-size: clamp(.95rem, 1vw + .2rem, 1.05rem);
+}
+
 /* Opcional: añade una sombra suave para darle más profundidad */
 .hero-text-box {
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 /* Clases para fondos de sección */
 .footer-bg-default {
