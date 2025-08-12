@@ -58,8 +58,7 @@ class BannerResource extends Resource
                             ->preserveFilenames()
                             ->image()
                             ->imageEditor()
-                            ->imageEditorAspectRatios(['16:9', '4:3']) // Opcional
-                            ->imageEditorMode('cover') // Opcional
+                            ->imageEditorAspectRatios(['16:9', '4:3']) // Permite seleccionar entre diferentes relaciones de aspecto
                             ->imageEditorViewportWidth(1920) // Opcional
                             ->imageEditorViewportHeight(1080) // Opcional
                             ->imageEditorQuality(90), // Controla el % de calidad
