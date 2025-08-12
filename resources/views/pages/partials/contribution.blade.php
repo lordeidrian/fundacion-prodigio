@@ -1,4 +1,3 @@
-{{-- CÓMO AYUDAR / LLAMADA A LA ACCIÓN --}}
 <section id="ayudar" class="py-5 bg-white">
     <div class="container my-5">
         <div class="text-center mb-5">
@@ -14,10 +13,16 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="card h-100 border-0 shadow-sm text-center p-4">
                             <div class="card-body d-flex flex-column">
-                                {{-- Aquí podrías añadir un campo de ícono en el futuro si quieres --}}
-                                <i class="bi {{ $loop->first ? 'bi-building' : 'bi-gift-fill' }} fs-1 text-accent"></i>
+
+                                {{-- ================================================ --}}
+                                {{-- LÍNEA CORREGIDA PARA EL ÍCONO DINÁMICO --}}
+                                {{-- ================================================ --}}
+                                <i class="bi {{ $method->icon ?? 'bi-heart-pulse' }} fs-1 text-accent"></i>
+
                                 <h4 class="card-title fw-bold mt-3">{{ $method->title }}</h4>
                                 <p class="card-text text-muted">{{ $method->description }}</p>
+
+                                {{-- Botón con estilo unificado --}}
                                 <a href="{{ url($method->button_link) }}" class="btn btn-outline-primary mt-auto">{{ $method->button_text }}</a>
                             </div>
                         </div>
