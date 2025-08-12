@@ -57,9 +57,9 @@ class PageController extends Controller
             ->get()
             ->keyBy('section_key'); // Lo agrupamos por la misma clave para que la vista funcione
         // --- FIN DE LA CORRECCIÓN ---
-
+        $supportMethods = SupportMethod::where('is_active', true)->orderBy('order')->get();
         // Pasamos los datos a la vista
-        return view('contacto', compact('pageSections'));
+        return view('contacto', compact('pageSections', 'supportMethods'));
     }
 
     public function submitContact(Request $request)

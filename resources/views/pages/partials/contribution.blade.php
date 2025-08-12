@@ -18,7 +18,7 @@
                                 <i class="bi {{ $loop->first ? 'bi-building' : 'bi-gift-fill' }} fs-1 text-accent"></i>
                                 <h4 class="card-title fw-bold mt-3">{{ $method->title }}</h4>
                                 <p class="card-text text-muted">{{ $method->description }}</p>
-                                <a href="{{ url($method->button_link) }}" class="btn {{ $loop->first ? 'btn-outline-primary' : 'btn-accent text-white' }} mt-auto">{{ $method->button_text }}</a>
+                                <a href="{{ url($method->button_link) }}" class="btn btn-outline-primary mt-auto">{{ $method->button_text }}</a>
                             </div>
                         </div>
                     </div>
