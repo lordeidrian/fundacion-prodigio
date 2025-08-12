@@ -39,7 +39,7 @@ class PageController extends Controller
         $pageSections = $pageSectionsRaw->keyBy('section_key');
 
         // --- Cargar Últimos Posts (tu código original) ---
-        $latestPosts = Post::latest()->take(4)->get();
+        $latestPosts = Post::latest()->take(6)->get();
         $featuredProjects = Project::where('status', 'published')->latest()->take(2)->get();
 
         // 2. Pasamos TODAS las variables a la vista.
