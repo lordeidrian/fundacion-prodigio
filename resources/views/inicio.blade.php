@@ -141,6 +141,7 @@
     @endif
 
     {{-- UN VISTAZO A NUESTRO TRABAJO --}}
+    {{-- UN VISTAZO A NUESTRO TRABAJO --}}
     <section class="py-5 bg-white">
         <div class="container">
             <div class="text-center mb-5">
@@ -148,34 +149,46 @@
                 <p class="lead text-muted">{{ $pageSections['vistazo_trabajo']->content['subtitle'] ?? 'Nuestra misión es transformar vidas a través de acciones concretas.' }}</p>
             </div>
 
-            {{-- NOTA: Como planeado, esta sección de proyectos se cargará desde su propio modelo en el futuro. --}}
-            {{-- Por ahora, se mantiene el contenido estático como marcador de posición. --}}
-            <div class="row g-4 justify-content-center">
-                <div class="col-lg-5 col-md-6">
-                    <div class="card shadow-sm h-100">
-                         <img src="{{ asset('images/embarazo-sonriente.jpg') }}" class="card-img-top" alt="Proyecto Embarazo Sonriente" style="height: 250px; object-fit: cover;">
-                        <div class="card-body">
-                            <h4 class="card-title fw-bold">Proyecto "Embarazo Sonriente"</h4>
-                            <p class="card-text small">Garantizamos atención odontológica gratuita a mujeres embarazadas de escasos recursos, protegiendo su salud y la de sus futuros bebés.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6">
-                    <div class="card shadow-sm h-100">
-                        <img src="https://fundacionprodigio.org/wp-content/uploads/2024/07/coi-compress.jpg" class="card-img-top" alt="Centro Odontológico Integral" style="height: 250px; object-fit: cover;">
-                        <div class="card-body">
-                            <h4 class="card-title fw-bold">Centro Odontológico Integral (COI)</h4>
-                            <p class="card-text small">El corazón de nuestras operaciones. Una clínica modelo con tecnología de punta para ofrecer tratamientos de excelencia.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{-- ================================================ --}}
+            {{-- INICIO DE LA MODIFICACIÓN DINÁMICA --}}
+            {{-- ================================================ --}}
 
-            <div class="text-center mt-5">
-                <a href="{{ route('proyectos.index') }}" class="btn btn-primary btn-lg">
-                    Conoce más sobre nuestros proyectos
-                </a>
-            </div>
+            @if(isset($featuredProjects) && $featuredProjects->isNotEmpty())
+                <div class="row g-4 justify-content-center">
+                    @foreach($featuredProjects as $project)
+                        <div class="col-lg-5 col-md-6 d-flex align-items-stretch">
+                            <div class="card shadow-sm h-100 w-100">
+                                {{-- La imagen ahora es un enlace a la página del proyecto --}}
+                                <a href="{{ route('proyectos.show', $project) }}">
+                                    <img src="{{ asset('storage/' . $project->featured_image) }}" class="card-img-top" alt="{{ $project->title }}" style="height: 250px; object-fit: cover;">
+                                </a>
+                                <div class="card-body">
+                                    <h4 class="card-title fw-bold">
+                                        {{-- El título también es un enlace --}}
+                                        <a href="{{ route('proyectos.show', $project) }}" class="text-decoration-none text-dark stretched-link">{{ $project->title }}</a>
+                                    </h4>
+                                    {{-- Usamos el campo 'excerpt' (resumen) del proyecto --}}
+                                    <p class="card-text small">{{ $project->excerpt }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="{{ route('proyectos.index') }}" class="btn btn-primary btn-lg">
+                        Conoce más sobre nuestros proyectos
+                    </a>
+                </div>
+            @else
+                <div class="text-center text-muted">
+                    <p>Próximamente publicaremos nuestros proyectos aquí.</p>
+                </div>
+            @endif
+
+            {{-- ================================================ --}}
+            {{-- FIN DE LA MODIFICACIÓN --}}
+            {{-- ================================================ --}}
         </div>
     </section>
 

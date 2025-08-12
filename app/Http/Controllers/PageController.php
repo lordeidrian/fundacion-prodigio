@@ -13,6 +13,7 @@ use App\Models\StrategicLine;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
 use App\Models\ContactSubmission;
+use App\Models\Project;
 
 class PageController extends Controller
 {
@@ -39,6 +40,7 @@ class PageController extends Controller
 
         // --- Cargar Últimos Posts (tu código original) ---
         $latestPosts = Post::latest()->take(4)->get();
+        $featuredProjects = Project::where('status', 'published')->latest()->take(2)->get();
 
         // 2. Pasamos TODAS las variables a la vista.
         return view('inicio', [
@@ -47,6 +49,7 @@ class PageController extends Controller
             'supportMethods' => $supportMethods,
             'pageSections' => $pageSections,
             'latestPosts' => $latestPosts,
+            'featuredProjects' => $featuredProjects,
         ]);
     }
     public function contacto()
