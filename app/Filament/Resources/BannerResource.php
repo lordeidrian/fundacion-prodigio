@@ -53,11 +53,16 @@ class BannerResource extends Resource
                     ->columns(2)
                     ->schema([
                         Forms\Components\FileUpload::make('image_path')
-                            ->label('Imagen del Banner')
-                            ->image()
+                            ->label('Imagen')
                             ->directory('banners')
-                            ->required()
-                            ->columnSpanFull(),
+                            ->preserveFilenames()
+                            ->image()
+                            ->imageEditor()
+                            ->imageEditorAspectRatios(['16:9', '4:3']) // Opcional
+                            ->imageEditorMode('cover') // Opcional
+                            ->imageEditorViewportWidth(1920) // Opcional
+                            ->imageEditorViewportHeight(1080) // Opcional
+                            ->imageEditorQuality(90), // Controla el % de calidad
                         Forms\Components\Toggle::make('is_active')
                             ->label('Activo')
                             ->helperText('Si está inactivo, no se mostrará en la página.')
