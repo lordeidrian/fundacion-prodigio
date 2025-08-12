@@ -57,6 +57,8 @@ class BannerResource extends Resource
                             ->label('Imagen (sin compresión)')
                             ->directory('banners')
                             ->preserveFilenames()
+                            ->imageResizeTargetWidth('1920')
+                            ->imageResizeTargetHeight('1080')
                             ->image() // Mantenemos la validación de imagen
                             ->required(),
                             //->columnSpanFull(), // Ocupa todo el ancho
