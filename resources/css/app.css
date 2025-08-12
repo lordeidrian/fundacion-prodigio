@@ -17,7 +17,7 @@ html, body {
     --bs-primary: #000000; /* Vibrante purple */
     --bs-primary-rgb: 109, 59, 255;
     --bs-secondary: #F7FAFC; /* Light gray */
-    --bs-accent: #FF7A59; /* Coral orange */
+    --bs-accent: #080808; /* Coral orange */
     --font-headings: 'Plus Jakarta Sans', sans-serif;
     --font-body: 'Source Sans 3', sans-serif;
     --bs-body-font-family: 'Source Sans 3', sans-serif; /* Fuente para el cuerpo */

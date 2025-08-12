@@ -36,12 +36,12 @@
 
                                     {{-- 2. Aplicamos los valores como variables CSS en el estilo del div. --}}
                                     <div class="hero-text-box" style="--text-color: {{ $textColor }}; --box-rgb: {{ $boxRgb }}; --box-opacity: {{ $boxOpacity }};">
-                                        <h1 class="fw-bold mb-3">{{ $banner->title }}</h1>
+                                        <h2 class="fw-bold mb-3">{{ $banner->title }}</h2>
                                         <p class="fs-6 mb-4">
                                             {!! nl2br(e($banner->subtitle)) !!}
                                         </p>
                                         @if($banner->button_text && $banner->button_link)
-                                            <a href="{{ $banner->button_link }}" class="btn btn-primary btn-lg">{{ $banner->button_text }}</a>
+                                            <a href="{{ $banner->button_link }}" class="btn btn-primary btn">{{ $banner->button_text }}</a>
                                         @endif
                                     </div>
 

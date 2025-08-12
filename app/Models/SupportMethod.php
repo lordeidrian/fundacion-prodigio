@@ -17,6 +17,7 @@ class SupportMethod extends Model
     protected $fillable = [
         'title',
         'description',
+        'icon',
         'button_text',
         'button_link',
         'order',
