@@ -19,62 +19,47 @@ class PageSection extends Model
         'content' => 'array',
     ];
 
-    /**
-     * Cualquier asignación a content (create/update) pasa por acá.
-     * - Recorre recursivamente el array.
-     * - Para todo string, decodifica entidades y QUITA el <p> envolvente si es un solo párrafo.
-     * - No toca contenidos "ricos" (múltiples párrafos/listas/tablas).
-     * - Opt-out: si la clave termina en "_html" o "_raw", NO limpia ese valor.
-     */
     public function setContentAttribute($value): void
     {
+        // Aseguramos array
         $data = is_array($value) ? $value : (json_decode($value, true) ?? []);
-        $this->attributes['content'] = $this->normalizeContentRecursively($data);
-    }
 
-    /** -------- Helpers privados -------- */
+        $this->attributes['content'] = json_encode(
+            $this->normalizeContentRecursively($data),
+            JSON_UNESCAPED_UNICODE
+        );
+    }
 
     private function normalizeContentRecursively($data)
     {
         if (is_array($data)) {
-            $normalized = [];
             foreach ($data as $key => $val) {
-                // Opt-out por nombre de clave
-                if (is_string($key) && $this->isHtmlOptOutKey($key)) {
-                    $normalized[$key] = $val; // lo dejamos tal cual
+                // Evitamos limpiar si la clave es "_html" o "_raw"
+                if (is_string($key) && preg_match('/(_html|_raw)$/i', $key)) {
+                    $data[$key] = $val;
                     continue;
                 }
-                $normalized[$key] = $this->normalizeContentRecursively($val);
+                $data[$key] = $this->normalizeContentRecursively($val);
             }
-            return $normalized;
+            return $data;
         }
 
         if (is_string($data)) {
-            return $this->stripSingleParagraph(html_entity_decode(trim($data), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+            return $this->stripSingleParagraph(
+                html_entity_decode(trim($data), ENT_QUOTES | ENT_HTML5, 'UTF-8')
+            );
         }
 
         return $data;
     }
 
-    private function isHtmlOptOutKey(string $key): bool
-    {
-        // si la clave termina con _html o _raw, no limpiamos
-        return (bool) preg_match('/(_html|_raw)$/i', $key);
-    }
-
-    /**
-     * Si el string es exactamente "<p>…</p>", devuelve el inner.
-     * Si tiene múltiples bloques (<p>, <ul>, <table>, <h1>…), lo deja intacto.
-     */
     private function stripSingleParagraph(string $html): string
     {
         $trimmed = trim($html);
 
-        // ¿Es solo un <p>…</p>?
         if (preg_match('/^<p\b[^>]*>(.*)<\/p>\s*$/is', $trimmed, $m)) {
             $inner = $m[1];
-
-            // ¿Dentro hay más bloques? Si los hay, no tocamos
+            // Revisamos si hay bloques dentro, si no, quitamos el wrapper
             $hasMoreBlocks = preg_match(
                 '/<(p|div|ul|ol|li|table|thead|tbody|tr|td|h[1-6]|blockquote)\b/i',
                 $inner
