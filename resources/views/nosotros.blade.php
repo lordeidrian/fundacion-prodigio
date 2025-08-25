@@ -186,7 +186,7 @@
                                     src="{{ $t->image_url }}"
                                     alt="Testimonio de {{ $t->author_name }}"
                                     class="w-100 h-100 object-fit-cover"
-                                    style="object-fit:cover;"
+                                    style="object-fit: contain; background-color: #fff"
                                 >
                             @elseif($t->media_is_youtube && $t->youtube_embed_url)
                                 <iframe
