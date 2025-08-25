@@ -31,7 +31,8 @@ class PageSectionResource extends Resource
                 Forms\Components\TextInput::make('section_key')
                     ->label('Identificador de la Sección')
                     ->disabled()
-                    ->dehydrated(),
+                    ->dehydrated()
+                    ->live(),
 
                 // --- INICIO DE CAMPOS CONDICIONALES ---
 
@@ -41,7 +42,7 @@ class PageSectionResource extends Resource
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), [
                         'pilares_accion', 'quienes_somos', 'vistazo_trabajo', 'ultimas_noticias', 'sumate_causa',
                         'hero', 'historia_mision', 'vision_estrategia', 'valores', 'equipo', 'cta',
-                        'impacto', 'alianzas' // <-- Añadido de "proyectos"
+                        'impacto', 'nuestra_alianza' // <-- Añadido de "proyectos"
                     ])),
 
                 Forms\Components\TextInput::make('content.subtitle')
@@ -50,7 +51,7 @@ class PageSectionResource extends Resource
                     ->visible(fn (Get $get): bool => in_array($get('section_key'), [
                         'pilares_accion', 'quienes_somos', 'vistazo_trabajo', 'ultimas_noticias',
                         'hero', 'valores', 'equipo', 'cta',
-                        'impacto', 'alianzas' // <-- Añadido de "proyectos"
+                        'impacto', 'nuestra_alianza' // <-- Añadido de "proyectos"
                     ])),
 
                 Forms\Components\Textarea::make('content.lead_text')
@@ -87,7 +88,7 @@ class PageSectionResource extends Resource
                     ->label('Imagen de la Sección')
                     ->image()->directory('page-sections')
                     ->columnSpanFull()
-                    ->visible(fn (Get $get): bool => in_array($get('section_key'), ['quienes_somos', 'hero', 'historia_mision'])),
+                    ->visible(fn (Get $get): bool => in_array($get('section_key'), ['quienes_somos', 'hero', 'historia_mision', 'nuestra_alianza'])),
 
                 Forms\Components\TextInput::make('content.button_text')
                     ->label('Texto del Botón')

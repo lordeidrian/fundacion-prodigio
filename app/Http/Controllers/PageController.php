@@ -14,6 +14,7 @@ use App\Models\TeamMember;
 use Illuminate\Http\Request;
 use App\Models\ContactSubmission;
 use App\Models\Project;
+use App\Models\Testimonial;
 
 class PageController extends Controller
 {
@@ -96,19 +97,38 @@ class PageController extends Controller
      */
     public function nosotros()
     {
-        // Cargar las secciones de la página "Nosotros"
-        $pageSections = PageSection::where('page_name', 'nosotros')->get()->keyBy('section_key');
+        // Secciones
+        $pageSections = PageSection::where('page_name', 'nosotros')
+            ->get()
+            ->keyBy('section_key');
 
-        // Cargar los valores ordenados
-        $values = Value::where('is_active', true)->orderBy('order')->get();
+        // Valores
+        $values = Value::where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
-        // Cargar las líneas estratégicas ordenadas
-        $strategicLines = StrategicLine::where('is_active', true)->orderBy('order')->get();
+        // Líneas estratégicas
+        $strategicLines = StrategicLine::where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
-        // Cargar los miembros del equipo ordenados
-        $teamMembers = TeamMember::where('is_active', true)->orderBy('order')->get();
+        // Equipo
+        $teamMembers = TeamMember::where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
-        // Pasar todas las colecciones de datos a la vista
-        return view('nosotros', compact('pageSections', 'values', 'strategicLines', 'teamMembers'));
+        // ✅ Testimonios visibles (imagen o YouTube)
+        $testimonials = Testimonial::where('is_visible', true)
+            ->orderBy('id', 'desc')   // o ->orderBy('order') si tenés ese campo
+            ->take(12)                // opcional: límite
+            ->get();
+
+        return view('nosotros', compact(
+            'pageSections',
+            'values',
+            'strategicLines',
+            'teamMembers',
+            'testimonials' // 👈 pásalo a la vista
+        ));
     }
 }

@@ -133,6 +133,96 @@
             </div>
         </section>
     @endif
+    {{-- NUESTRA ALIANZA (título, subtítulo y debajo imagen centrada, sin bordes/sombras) --}}
+    @if(isset($pageSections['nuestra_alianza']))
+        @php $alianza = $pageSections['nuestra_alianza']->content; @endphp
+        <section class="py-5 bg-white">
+            <div class="container my-5">
+                <div class="text-center mx-auto" style="max-width: 960px;">
+                    <h2 class="display-5 fw-bold font-headline text-dark mb-2">
+                        {{ $alianza['title'] ?? 'Nuestra Alianza' }}
+                    </h2>
+
+                    @if(!empty($alianza['subtitle']))
+                        <p class="lead text-muted mb-4">
+                            {{ $alianza['subtitle'] }}
+                        </p>
+                    @endif
+
+                    @if(!empty($alianza['image_path']))
+                        <img
+                            src="{{ asset('storage/'.$alianza['image_path']) }}"
+                            alt="Nuestra Alianza"
+                            class="img-fluid d-block mx-auto"
+                            loading="lazy"
+                            style="border:0; box-shadow:none; outline:none; max-width:100%; height:auto;"
+                        >
+                    @endif
+                </div>
+            </div>
+        </section>
+    @endif
+    {{-- TESTIMONIOS --}}
+    @if(isset($testimonials) && $testimonials->isNotEmpty())
+    <section class="py-5 bg-light">
+        <div class="container my-5">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold font-headline text-dark">
+                    {{ $pageSections['testimonios']->content['title'] ?? 'Testimonios' }}
+                </h2>
+                <p class="lead text-muted mx-auto" style="max-width:800px;">
+                    {{ $pageSections['testimonios']->content['subtitle'] ?? 'Historias reales del impacto que construimos juntos.' }}
+                </p>
+            </div>
+
+            <div class="row g-4">
+                @foreach($testimonials as $t)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        {{-- Contenedor de medio con tamaño unificado (siempre rectángulo 16:9) --}}
+                        <div class="ratio ratio-16x9 rounded-top overflow-hidden">
+                            @if($t->media_is_image && $t->image_url)
+                                <img
+                                    src="{{ $t->image_url }}"
+                                    alt="Testimonio de {{ $t->author_name }}"
+                                    class="w-100 h-100 object-fit-cover"
+                                    style="object-fit:cover;"
+                                >
+                            @elseif($t->media_is_youtube && $t->youtube_embed_url)
+                                <iframe
+                                    src="{{ $t->youtube_embed_url }}"
+                                    title="Video de {{ $t->author_name }}"
+                                    class="w-100 h-100 border-0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen
+                                ></iframe>
+                            @else
+                                {{-- Placeholder si no hay medio --}}
+                                <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light">
+                                    <i class="bi bi-chat-quote fs-1 text-secondary"></i>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <blockquote class="mb-3 text-muted" style="min-height: 72px;">
+                                “{{ $t->quote }}”
+                            </blockquote>
+
+                            <div class="mt-auto">
+                                <div class="fw-bold">{{ $t->author_name }}</div>
+                                <div class="small text-primary fw-semibold">{{ $t->author_context }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+
 
     {{-- CALL TO ACTION (CTA) --}}
     @if(isset($pageSections['cta']))
