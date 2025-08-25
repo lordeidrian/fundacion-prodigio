@@ -84,11 +84,11 @@
             <div class="row text-center">
                 <div class="col-12">
                     <h2 class="display-5 fw-bold font-headline text-dark">
-                        {!! $pageSections['pilares_accion']->content['title'] ?? 'Nuestros Pilares de Acción' !!}
+                        { $pageSections['pilares_accion']->content['title'] ?? 'Nuestros Pilares de Acción' }
                     </h2>
 
                     <p class="lead text-muted mx-auto" style="max-width: 800px;">
-                        {!! $pageSections['pilares_accion']->content['subtitle'] ?? 'Nuestra labor se fundamenta en tres compromisos clave que guían cada uno de nuestros proyectos y alianzas.' !!}
+                        { $pageSections['pilares_accion']->content['subtitle'] ?? 'Nuestra labor se fundamenta en tres compromisos clave que guían cada uno de nuestros proyectos y alianzas.' }
                     </p>
                 </div>
             </div>
