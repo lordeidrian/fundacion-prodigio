@@ -22,7 +22,7 @@
                     background-position: {{ $banner->image_position ?? 'center center' }};
                     background-size: cover;
                     background-repeat: no-repeat;">
-                        <div class="container d-flex align-items-center" style="min-height: 95vh;">
+                        <div class="container d-flex align-items-center" style="min-height: 100vh;">
                             <div class="row">
                                 <div class="col-lg-8">
 
