@@ -15,13 +15,32 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+@php
+    use App\Models\PageSection;
+
+    $contact = cache()->remember('contacto_info', 300, function () {
+        return PageSection::where('page_name', 'contacto')
+            ->where('section_key', 'informacion_contacto')
+            ->first();
+    });
+
+    $phoneRaw = $contact->content['phone'] ?? null;
+    $phone    = $phoneRaw ? preg_replace('/\D+/', '', $phoneRaw) : null; // solo dígitos
+    $text     = 'Hola, quiero más información 🙂';
+
+    $whatsappUrl = $phone
+        ? 'https://api.whatsapp.com/send/?phone='.$phone
+          .'&text='.urlencode($text)
+          .'&type=phone_number&app_absent=0'
+        : null;
+@endphp
 <body class="bg-light">
 <!-- Mini Chat de WhatsApp (inicialmente oculto por CSS) -->
 <div class="whatsapp-minichat">
         <div class="minichat-header-whatsapp">
             <div class="d-flex align-items-center">
                 <!-- Logo de la Fundación Prodigio (puedes usar un SVG o una imagen pequeña) -->
-                <img src="{{ asset('images/logo-fundacion-prodigio-small.png') }}" alt="Logo Fundación Prodigio" class="minichat-logo me-2">
+                <img src="{{ asset('file.jpg') }}" alt="Logo Fundación Prodigio" class="minichat-logo me-2">
                 <div>
                     <span class="minichat-company-name">Fundación Prodigio</span>
                     <small class="minichat-response-time d-block">Normalmente responde en unos minutos</small>
@@ -33,7 +52,7 @@
             <div class="minichat-message-bubble">
                 <p>¡Hola! 👋 ¿Listo para sonreír? Haz clic aquí para chatear con un asesor.</p>
             </div>
-            <a href="#" id="whatsapp-link" target="_blank" class="btn btn-sm btn-whatsapp-chat w-100 mt-3">
+            <a href="{{ $whatsappUrl }}" target="_blank" class="btn btn-sm btn-whatsapp-chat w-100 mt-3" rel="noopener">
                 <i class="bi bi-whatsapp me-2"></i>Chatear por WhatsApp
             </a>
         </div>
