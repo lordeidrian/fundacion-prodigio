@@ -4,6 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Fundación Prodigio')</title>
+    
+    {{-- SEO Meta Tags --}}
+    <meta name="description" content="@yield('meta_description', 'Fundación Prodigio - Organización dedicada a la salud y bienestar en Paraguay. COI (Centro Odontológico Integral) y programa Cero Caries para comunidades vulnerables.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'fundacion prodigio, COI, centro odontológico integral, cero caries, salud dental Paraguay, odontología social, fundación salud Paraguay, atención dental gratuita, proyectos sociales salud')">
+    <meta name="author" content="Fundación Prodigio">
+    <meta name="language" content="es">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    
+    {{-- Open Graph Meta Tags for Social Media --}}
+    <meta property="og:title" content="@yield('og_title', 'Fundación Prodigio')">
+    <meta property="og:description" content="@yield('og_description', 'Fundación Prodigio - Transformando vidas a través del acceso a la salud. COI (Centro Odontológico Integral) y programa Cero Caries.')">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="@yield('og_image', asset('file.jpg'))">
+    <meta property="og:site_name" content="Fundación Prodigio">
+    <meta property="og:locale" content="es_PY">
+    
+    {{-- Twitter Card Meta Tags --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('twitter_title', 'Fundación Prodigio')">
+    <meta name="twitter:description" content="@yield('twitter_description', 'Fundación Prodigio - COI (Centro Odontológico Integral) y programa Cero Caries para comunidades de Paraguay.')">
+    <meta name="twitter:image" content="@yield('twitter_image', asset('file.jpg'))">
+    
+    {{-- Structured Data - Organization Schema --}}
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Organization",
+      "name": "Fundación Prodigio",
+      "url": "{{ url('/') }}",
+      "logo": "{{ asset('file.jpg') }}",
+      "description": "Fundación dedicada a mejorar el acceso a la salud en Paraguay, con programas como COI (Centro Odontológico Integral) y Cero Caries",
+      "address": {
+        "@@type": "PostalAddress",
+        "addressCountry": "PY"
+      }
+    }
+    </script>
+    
+    {{-- Structured Data - LocalBusiness Schema for COI --}}
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Dentist",
+      "name": "COI - Centro Odontológico Integral",
+      "description": "Centro Odontológico Integral de Fundación Prodigio, brindando atención dental de calidad a comunidades vulnerables",
+      "parentOrganization": {
+        "@@type": "Organization",
+        "name": "Fundación Prodigio"
+      },
+      "address": {
+        "@@type": "PostalAddress",
+        "addressCountry": "PY"
+      },
+      "medicalSpecialty": "Dentistry",
+      "priceRange": "Gratuito para comunidades vulnerables"
+    }
+    </script>
+    
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -16,10 +76,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 @php
-    use App\Models\PageSection;
-
     $contact = cache()->remember('contacto_info', 300, function () {
-        return PageSection::where('page_name', 'contacto')
+        return \App\Models\PageSection::where('page_name', 'contacto')
             ->where('section_key', 'informacion_contacto')
             ->first();
     });

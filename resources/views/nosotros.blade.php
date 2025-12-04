@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Sobre Nosotros - Fundación Prodigio')
+@section('title', 'Nosotros - Fundación Prodigio')
+
+@section('meta_description', 'Conoce a Fundación Prodigio: nuestra misión, visión y valores. Trabajamos por el acceso universal a la salud en Paraguay con programas como COI y Cero Caries.')
+
+@section('meta_keywords', 'fundacion prodigio nosotros, misión fundación, visión salud Paraguay, COI centro odontológico, equipo fundación prodigio')
+
 
 @section('content')
 

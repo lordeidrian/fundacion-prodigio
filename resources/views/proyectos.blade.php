@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Nuestro Trabajo - Fundación Prodigio')
+@section('title', 'Proyectos - Fundación Prodigio')
+
+@section('meta_description', 'Descubre los proyectos sociales de Fundación Prodigio en Paraguay. COI (Centro Odontológico Integral), programa Cero Caries y más iniciativas de salud comunitaria.')
+
+@section('meta_keywords', 'proyectos fundacion prodigio, COI centro odontológico, cero caries, proyectos salud Paraguay, salud comunitaria, odontología social')
+
 
 @section('content')
 

@@ -2,6 +2,11 @@
 
 @section('title', 'Inicio - Fundación Prodigio')
 
+@section('meta_description', 'Fundación Prodigio - Transformando vidas en Paraguay a través del acceso a la salud. Conoce nuestro COI (Centro Odontológico Integral) y el programa Cero Caries para comunidades vulnerables.')
+
+@section('meta_keywords', 'fundacion prodigio, COI, centro odontológico integral, cero caries, salud dental Paraguay, fundación salud, odontología social, atención dental gratuita, proyectos sociales Paraguay')
+
+
 @section('content')
 
     {{-- HERO SECTION COMO CARRUSEL --}}

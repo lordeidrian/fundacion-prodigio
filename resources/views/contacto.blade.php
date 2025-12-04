@@ -2,6 +2,11 @@
 
 @section('title', 'Contacto - Fundación Prodigio')
 
+@section('meta_description', 'Contacta con Fundación Prodigio. Información sobre COI (Centro Odontológico Integral), programa Cero Caries y cómo colaborar con nuestros proyectos de salud en Paraguay.')
+
+@section('meta_keywords', 'contacto fundacion prodigio, COI contacto, centro odontológico integral contacto, cero caries información, donar fundación Paraguay')
+
+
 @section('content')
 
     {{-- Definimos la variable de forma segura al principio --}}

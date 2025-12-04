@@ -1,2 +1,13 @@
+# Permitir acceso a todos los bots de búsqueda
 User-agent: *
-Disallow: /
+Allow: /
+
+# Bloquear áreas administrativas
+Disallow: /admin
+Disallow: /filament
+Disallow: /login
+Disallow: /register
+
+# Sitemap
+Sitemap: http://127.0.0.1:8000/sitemap.xml
+

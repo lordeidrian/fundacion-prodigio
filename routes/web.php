@@ -19,6 +19,12 @@ Route::get('/nosotros', [PageController::class, 'nosotros'])->name('nosotros');
 // --- RUTA FALTANTE AÑADIDA AQUÍ ---
 Route::get('/contacto', [PageController::class, 'contacto'])->name('contacto');
 
+// --- Ruta para el Sitemap (SEO) ---
+Route::get('/sitemap.xml', function () {
+    return response()->view('sitemap')->header('Content-Type', 'application/xml');
+});
+
+
 // --- Ruta para procesar el envío del formulario de contacto ---
 Route::post('/contacto', [PageController::class, 'submitContact'])->name('contact.submit');
 

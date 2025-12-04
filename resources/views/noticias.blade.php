@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Blog - Fundación Prodigio')
+@section('title', 'Noticias - Fundación Prodigio')
+
+@section('meta_description', 'Últimas noticias y eventos de Fundación Prodigio. Mantente informado sobre nuestras actividades, COI (Centro Odontológico Integral) y el programa Cero Caries en Paraguay.')
+
+@section('meta_keywords', 'noticias fundacion prodigio, eventos salud Paraguay, COI noticias, cero caries actualidad, fundación salud eventos')
+
 
 @section('content')
     <div class="page-header-overlay" style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.8), rgba(0, 100, 210, 0.7)), url('{{ asset('images/banner-noticias.jpg') }}');">
