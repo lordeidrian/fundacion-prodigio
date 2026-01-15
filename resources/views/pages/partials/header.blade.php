@@ -42,25 +42,4 @@
     </div>
 </div>
 
-<!-- Menú Offcanvas (Móvil) -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenuLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="mobileMenuLabel">
-            <a class="navbar-brand d-flex align-items-center" href="{{ route('inicio') }}">
-                <!-- SVG del logo -->
-                <span class="fw-bold fs-5 text-primary">Fundación Prodigio</span>
-            </a>
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body d-flex flex-column">
-        <ul class="navbar-nav flex-grow-1">
-            <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('inicio') }}">Inicio</a></li>
-            <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('nosotros') }}">Nosotros</a></li>
-            <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('proyectos.index') }}">Nuestro Trabajo</a></li>
-            <li class="nav-item"><a class="nav-link fs-5 py-2" href="{{ route('noticias.index') }}">Noticias y Eventos</a></li>
 
-        </ul>
-        <a href="{{ route('contacto') }}" class="btn btn-accent text-white btn-lg mt-auto">Contacto</a>
-    </div>
-</div>

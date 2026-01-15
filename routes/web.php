@@ -21,7 +21,11 @@ Route::get('/contacto', [PageController::class, 'contacto'])->name('contacto');
 
 // --- Ruta para el Sitemap (SEO) ---
 Route::get('/sitemap.xml', function () {
-    return response()->view('sitemap')->header('Content-Type', 'application/xml');
+    $projects = \App\Models\Project::where('status', 'published')->get();
+    $posts = \App\Models\Post::where('status', 'published')->get();
+
+    return response()->view('sitemap', compact('projects', 'posts'))
+        ->header('Content-Type', 'application/xml');
 });
 
 

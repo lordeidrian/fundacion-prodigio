@@ -15,23 +15,44 @@
     </url>
 
     <url>
-        <loc>{{ url('/proyectos') }}</loc>
+        <loc>{{ url('/contacto') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    {{-- Main Index Pages --}}
+    <url>
+        <loc>{{ route('proyectos.index') }}</loc>
         <lastmod>{{ now()->toAtomString() }}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
-        <loc>{{ url('/noticias') }}</loc>
+        <loc>{{ route('noticias.index') }}</loc>
         <lastmod>{{ now()->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
 
+    {{-- Dynamic Projects --}}
+    @foreach ($projects as $project)
     <url>
-        <loc>{{ url('/contacto') }}</loc>
-        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <loc>{{ route('proyectos.show', $project) }}</loc>
+        <lastmod>{{ $project->updated_at->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    @endforeach
+
+    {{-- Dynamic Posts --}}
+    @foreach ($posts as $post)
+    <url>
+        <loc>{{ route('noticias.single', $post) }}</loc>
+        <lastmod>{{ $post->updated_at->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
+    @endforeach
 </urlset>

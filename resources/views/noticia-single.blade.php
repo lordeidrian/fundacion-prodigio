@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
 @section('title', $post->title . ' - Fundación Prodigio')
+@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($post->content), 150))
+@section('og_title', $post->title)
+@section('og_description', \Illuminate\Support\Str::limit(strip_tags($post->content), 150))
+@section('og_image', asset('storage/' . $post->featured_image))
 
 @section('content')
     <div class="container py-5 mt-5">
+        {{-- Breadcrumbs --}}
+        @include('pages.partials.breadcrumbs', ['links' => ['Noticias' => route('noticias.index'), $post->title => '']])
         <div class="row justify-content-center g-5">
             <div class="col-lg-8">
                 @if($post->category)
@@ -35,4 +41,30 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ $post->title }}",
+  "image": "{{ asset('storage/' . $post->featured_image) }}",
+  "datePublished": "{{ $post->created_at->toIso8601String() }}",
+  "dateModified": "{{ $post->updated_at->toIso8601String() }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ $post->author->name ?? 'Fundación Prodigio' }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Fundación Prodigio",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ asset('file.jpg') }}"
+    }
+  },
+  "description": "{{ \Illuminate\Support\Str::limit(strip_tags($post->content), 150) }}"
+}
+</script>
 @endsection

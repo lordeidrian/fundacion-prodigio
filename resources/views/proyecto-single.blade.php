@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', $project->title . ' - Fundación Prodigio')
+@section('meta_description', $project->excerpt)
+@section('og_title', $project->title . ' - Fundación Prodigio')
+@section('og_description', $project->excerpt)
+@section('og_image', asset('storage/' . $project->featured_image))
 
 @section('content')
     {{-- HERO DEL PROYECTO --}}
@@ -8,15 +12,19 @@
          style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.7), rgba(0, 100, 210, 0.6)), url('{{ asset('storage/' . $project->featured_image) }}');
                  background-position: center center; background-size: cover; background-repeat: no-repeat;">
         <div class="container py-5 text-center text-white">
-            @if($project->parent)
-                <a href="{{ route('proyectos.show', $project->parent->slug) }}" class="text-white-50 text-decoration-none d-block mb-2">
-                    <i class="bi bi-arrow-left-short"></i> Parte de: {{ $project->parent->title }}
-                </a>
-            @else
-                <a href="{{ route('proyectos.index') }}" class="text-white-50 text-decoration-none d-block mb-2">
-                    <i class="bi bi-arrow-left-short"></i> Volver a Nuestro Trabajo
-                </a>
-            @endif
+            {{-- Breadcrumbs --}}
+            <div class="d-flex justify-content-center mb-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('proyectos.index') }}" class="text-white-50 text-decoration-none">Nuestro Trabajo</a></li>
+                        @if($project->parent)
+                            <li class="breadcrumb-item"><a href="{{ route('proyectos.show', $project->parent->slug) }}" class="text-white-50 text-decoration-none">{{ $project->parent->title }}</a></li>
+                        @endif
+                        <li class="breadcrumb-item active text-white" aria-current="page">{{ $project->title }}</li>
+                    </ol>
+                </nav>
+            </div>
+
             <h1 class="display-4 fw-bold">{{ $project->title }}</h1>
             <p class="lead">{{ $project->excerpt }}</p>
         </div>
@@ -133,6 +141,59 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+{{-- Structured Data for Project --}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Project",
+  "name": "{{ $project->title }}",
+  "description": "{{ $project->excerpt }}",
+  "url": "{{ route('proyectos.show', $project) }}",
+  "image": "{{ asset('storage/' . $project->featured_image) }}",
+  "parentOrganization": {
+      "@type": "Organization",
+      "name": "Fundación Prodigio"
+  }
+}
+</script>
+
+{{-- Breadcrumb Schema --}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "{{ route('inicio') }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Nuestro Trabajo",
+      "item": "{{ route('proyectos.index') }}"
+    },
+    @if($project->parent)
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ $project->parent->title }}",
+      "item": "{{ route('proyectos.show', $project->parent) }}"
+    },
+    @endif
+    {
+      "@type": "ListItem",
+      "position": {{ $project->parent ? 4 : 3 }},
+      "name": "{{ $project->title }}"
+    }
+  ]
+}
+</script>
 @endsection
 
 @push('styles')
