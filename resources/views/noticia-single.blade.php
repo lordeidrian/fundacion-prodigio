@@ -9,7 +9,15 @@
 @section('content')
     <div class="container py-5 mt-5">
         {{-- Breadcrumbs --}}
-        @include('pages.partials.breadcrumbs', ['links' => ['Noticias' => route('noticias.index'), $post->title => '']])
+        <div class="d-flex justify-content-center mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ route('noticias.index') }}">Noticias</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
+                </ol>
+            </nav>
+        </div>
+
         <div class="row justify-content-center g-5">
             <div class="col-lg-8">
                 @if($post->category)
@@ -25,6 +33,7 @@
                 </p>
                 <img src="{{ asset('storage/' . $post->featured_image) }}" class="img-fluid rounded-3 shadow-lg mb-5" alt="{{ $post->title }}">
                 <div class="post-content">{!! $post->content !!}</div>
+                
                 @if($post->tags->isNotEmpty())
                     <div class="mt-5">
                         <strong>Etiquetas:</strong>
@@ -33,6 +42,7 @@
                         @endforeach
                     </div>
                 @endif
+
                 <div class="text-center mt-5"><a href="{{ route('noticias.index') }}" class="btn btn-outline-primary"><i class="bi bi-arrow-left"></i> Volver al Blog</a></div>
             </div>
 
@@ -46,21 +56,47 @@
 @section('scripts')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "{{ route('inicio') }}"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 2,
+      "name": "Noticias",
+      "item": "{{ route('noticias.index') }}"
+    },
+    {
+      "@@type": "ListItem",
+      "position": 3,
+      "name": "{{ $post->title }}"
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@@context": "https://schema.org",
+  "@@type": "BlogPosting",
   "headline": "{{ $post->title }}",
   "image": "{{ asset('storage/' . $post->featured_image) }}",
   "datePublished": "{{ $post->created_at->toIso8601String() }}",
   "dateModified": "{{ $post->updated_at->toIso8601String() }}",
   "author": {
-    "@type": "Person",
+    "@@type": "Person",
     "name": "{{ $post->author->name ?? 'Fundación Prodigio' }}"
   },
   "publisher": {
-    "@type": "Organization",
+    "@@type": "Organization",
     "name": "Fundación Prodigio",
     "logo": {
-      "@type": "ImageObject",
+      "@@type": "ImageObject",
       "url": "{{ asset('file.jpg') }}"
     }
   },

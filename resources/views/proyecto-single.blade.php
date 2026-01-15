@@ -147,14 +147,14 @@
 {{-- Structured Data for Project --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Project",
+  "@@context": "https://schema.org",
+  "@@type": "Project",
   "name": "{{ $project->title }}",
   "description": "{{ $project->excerpt }}",
   "url": "{{ route('proyectos.show', $project) }}",
   "image": "{{ asset('storage/' . $project->featured_image) }}",
   "parentOrganization": {
-      "@type": "Organization",
+      "@@type": "Organization",
       "name": "Fundación Prodigio"
   }
 }
@@ -163,31 +163,31 @@
 {{-- Breadcrumb Schema --}}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
   "itemListElement": [
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 1,
       "name": "Inicio",
       "item": "{{ route('inicio') }}"
     },
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 2,
       "name": "Nuestro Trabajo",
       "item": "{{ route('proyectos.index') }}"
     },
     @if($project->parent)
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": 3,
       "name": "{{ $project->parent->title }}",
       "item": "{{ route('proyectos.show', $project->parent) }}"
     },
     @endif
     {
-      "@type": "ListItem",
+      "@@type": "ListItem",
       "position": {{ $project->parent ? 4 : 3 }},
       "name": "{{ $project->title }}"
     }

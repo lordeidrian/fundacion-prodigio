@@ -1,4 +1,4 @@
-@props(['links' => []])
+
 
 <nav aria-label="breadcrumb" class="my-3">
     <ol class="breadcrumb">
