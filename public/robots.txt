@@ -1,2 +1,7 @@
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /admin
+Disallow: /filament
+
+Sitemap: https://fundacionprodigio.org/sitemap.xml
+

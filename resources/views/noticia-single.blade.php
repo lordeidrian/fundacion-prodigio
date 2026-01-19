@@ -1,9 +1,18 @@
 @extends('layouts.app')
 
-@section('title', $post->title . ' - Fundación Prodigio')
+@section('meta_title', $seo['title'] ?? $post->title)
+@section('meta_description', $seo['description'] ?? '')
+@section('og_type', 'article')
+@section('og_image', $seo['image'] ?? asset('file.jpg'))
 
 @section('content')
     <div class="container py-5 mt-5">
+        @include('components.breadcrumbs', ['items' => [
+            ['label' => 'Inicio', 'url' => route('inicio')],
+            ['label' => 'Blog', 'url' => route('noticias.index')],
+            ['label' => $post->title]
+        ]])
+        
         <div class="row justify-content-center g-5">
             <div class="col-lg-8">
                 @if($post->category)
@@ -35,4 +44,36 @@
             </div>
         </div>
     </div>
+    
+    {{-- Article Schema --}}
+    @push('head')
+    <script type="application/ld+json">
+    {
+      "{!! '@context' !!}": "https://schema.org",
+      "{!! '@type' !!}": "Article",
+      "headline": "{{ $post->title }}",
+      "description": "{{ strip_tags(substr($post->content, 0, 160)) }}",
+      "image": "{{ $post->featured_image ? asset('storage/' . $post->featured_image) : asset('file.jpg') }}",
+      "datePublished": "{{ $post->created_at->toIso8601String() }}",
+      "dateModified": "{{ $post->updated_at->toIso8601String() }}",
+      "author": {
+        "{!! '@type' !!}": "Person",
+        "name": "{{ $post->author->name ?? 'Fundación Prodigio' }}"
+      },
+      "publisher": {
+        "{!! '@type' !!}": "Organization",
+        "name": "Fundación Prodigio",
+        "logo": {
+          "{!! '@type' !!}": "ImageObject",
+          "url": "{{ asset('file.jpg') }}"
+        }
+      },
+      "mainEntityOfPage": {
+        "{!! '@type' !!}": "WebPage",
+        "{!! '@id' !!}": "{{ url()->current() }}"
+      }
+    }
+    </script>
+    @endpush
 @endsection
+

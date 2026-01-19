@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Nuestro Trabajo - Fundación Prodigio')
+@section('meta_title', $seo['title'] ?? 'Nuestro Trabajo')
+@section('meta_description', $seo['description'] ?? '')
 
 @section('content')
 
@@ -16,6 +17,11 @@
 
     <section class="py-5 bg-light">
         <div class="container my-5">
+            @include('components.breadcrumbs', ['items' => [
+                ['label' => 'Inicio', 'url' => route('inicio')],
+                ['label' => 'Nuestro Trabajo']
+            ]])
+            
             @if(isset($projects) && $projects->isNotEmpty())
                 @foreach($projects as $project)
                     <div class="row align-items-center g-5 {{ !$loop->first ? 'mt-5 pt-5 border-top' : '' }}">

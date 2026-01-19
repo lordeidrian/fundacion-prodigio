@@ -28,7 +28,13 @@ class BlogController extends Controller
         $tags = Tag::all();
         $recentPosts = Post::where('status', 'published')->latest()->take(5)->get();
 
-        return view('noticias', compact('posts', 'categories', 'tags', 'recentPosts'));
+        return view('noticias', array_merge(
+            compact('posts', 'categories', 'tags', 'recentPosts'),
+            ['seo' => [
+                'title' => 'Blog',
+                'description' => 'Noticias, eventos y novedades de Fundación Prodigio. Mantente informado sobre nuestras últimas actividades y el impacto que estamos generando.',
+            ]]
+        ));
     }
 
     public function show(Post $post)
@@ -39,6 +45,13 @@ class BlogController extends Controller
         $tags = Tag::all();
         $recentPosts = Post::where('id', '!=', $post->id)->where('status', 'published')->latest()->take(5)->get();
 
-        return view('noticia-single', compact('post', 'categories', 'tags', 'recentPosts'));
+        return view('noticia-single', array_merge(
+            compact('post', 'categories', 'tags', 'recentPosts'),
+            ['seo' => [
+                'title' => $post->title,
+                'description' => strip_tags(substr($post->content, 0, 160)),
+                'image' => $post->featured_image ? asset('storage/' . $post->featured_image) : null,
+            ]]
+        ));
     }
 }

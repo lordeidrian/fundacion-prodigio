@@ -35,3 +35,7 @@ Route::prefix('blog')->name('noticias.')->group(function () {
     Route::get('/', [BlogController::class, 'index'])->name('index');
     Route::get('/{post:slug}', [BlogController::class, 'show'])->name('single');
 });
+
+// --- Sitemap XML ---
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+

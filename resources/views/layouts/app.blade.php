@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Fundación Prodigio')</title>
+    
+    {{-- SEO Meta Tags --}}
+    <title>@yield('meta_title', App\Helpers\SeoHelper::title(null))</title>
+    <meta name="description" content="@yield('meta_description', App\Helpers\SeoHelper::description())">
+    <link rel="canonical" href="{{ url()->current() }}">
+    
+    {{-- Open Graph Meta Tags --}}
+    <meta property="og:title" content="@yield('meta_title', App\Helpers\SeoHelper::title(null))">
+    <meta property="og:description" content="@yield('meta_description', App\Helpers\SeoHelper::description())">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="@yield('og_type', 'website')">
+    <meta property="og:image" content="@yield('og_image', asset('file.jpg'))">
+    <meta property="og:site_name" content="Fundación Prodigio">
+    <meta property="og:locale" content="es_PY">
+    
+    {{-- Twitter Card Meta Tags --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('meta_title', App\Helpers\SeoHelper::title(null))">
+    <meta name="twitter:description" content="@yield('meta_description', App\Helpers\SeoHelper::description())">
+    <meta name="twitter:image" content="@yield('og_image', asset('file.jpg'))">
+    
+    {{-- Language & Locale --}}
+    <meta http-equiv="content-language" content="es">
+    
+    {{-- Google Search Console Verification (when ready) --}}
+    @if(env('GOOGLE_SEARCH_CONSOLE_VERIFICATION'))
+        <meta name="google-site-verification" content="{{ env('GOOGLE_SEARCH_CONSOLE_VERIFICATION') }}">
+    @endif
+    
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -14,6 +42,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    {{-- Schema.org JSON-LD --}}
+    @include('components.schema-organization')
+    @include('components.schema-website')
+    
+    @stack('head')
 </head>
 @php
     use App\Models\PageSection;

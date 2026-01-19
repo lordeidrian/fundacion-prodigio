@@ -51,6 +51,10 @@ class PageController extends Controller
             'pageSections' => $pageSections,
             'latestPosts' => $latestPosts,
             'featuredProjects' => $featuredProjects,
+            'seo' => [
+                'title' => null,
+                'description' => null,
+            ],
         ]);
     }
     public function contacto()
@@ -63,7 +67,13 @@ class PageController extends Controller
         // --- FIN DE LA CORRECCIÓN ---
         $supportMethods = SupportMethod::where('is_active', true)->orderBy('order')->get();
         // Pasamos los datos a la vista
-        return view('contacto', compact('pageSections', 'supportMethods'));
+        return view('contacto', array_merge(
+            compact('pageSections', 'supportMethods'),
+            ['seo' => [
+                'title' => 'Contacto',
+                'description' => 'Ponte en contacto con Fundación Prodigio. Estamos aquí para responder tus preguntas y colaborar contigo en favor de la educación y el desarrollo comunitario.',
+            ]]
+        ));
     }
 
     public function submitContact(Request $request)
@@ -123,12 +133,18 @@ class PageController extends Controller
             ->take(12)                // opcional: límite
             ->get();
 
-        return view('nosotros', compact(
-            'pageSections',
-            'values',
-            'strategicLines',
-            'teamMembers',
-            'testimonials' // 👈 pásalo a la vista
+        return view('nosotros', array_merge(
+            compact(
+                'pageSections',
+                'values',
+                'strategicLines',
+                'teamMembers',
+                'testimonials'
+            ),
+            ['seo' => [
+                'title' => 'Nosotros',
+                'description' => 'Conoce a Fundación Prodigio, nuestra misión, visión, valores y equipo dedicado a transformar vidas a través de la educación y el desarrollo comunitario.',
+            ]]
         ));
     }
 }

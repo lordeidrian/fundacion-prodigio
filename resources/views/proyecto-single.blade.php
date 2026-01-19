@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
-@section('title', $project->title . ' - Fundación Prodigio')
+@section('meta_title', $seo['title'] ?? $project->title)
+@section('meta_description', $seo['description'] ?? '')
+@section('og_type', 'article')
+@section('og_image', $seo['image'] ?? asset('file.jpg'))
 
 @section('content')
     {{-- HERO DEL PROYECTO --}}
@@ -25,6 +28,18 @@
     {{-- CONTENIDO DEL PROYECTO --}}
     <section class="py-5 bg-light">
         <div class="container my-5">
+            @php
+                $breadcrumbItems = [
+                    ['label' => 'Inicio', 'url' => route('inicio')],
+                    ['label' => 'Nuestro Trabajo', 'url' => route('proyectos.index')],
+                ];
+                if ($project->parent) {
+                    $breadcrumbItems[] = ['label' => $project->parent->title, 'url' => route('proyectos.show', $project->parent->slug)];
+                }
+                $breadcrumbItems[] = ['label' => $project->title];
+            @endphp
+            @include('components.breadcrumbs', ['items' => $breadcrumbItems])
+            
             <div class="row justify-content-center">
                 <div class="col-lg-10">
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Blog - Fundación Prodigio')
+@section('meta_title', $seo['title'] ?? 'Blog')
+@section('meta_description', $seo['description'] ?? '')
 
 @section('content')
     <div class="page-header-overlay" style="background-image: linear-gradient(45deg, rgba(29, 69, 107, 0.8), rgba(0, 100, 210, 0.7)), url('{{ asset('images/banner-noticias.jpg') }}');">
@@ -10,7 +11,12 @@
         </div>
     </div>
 
-    <div class="container py-5">
+   <div class="container py-5">
+        @include('components.breadcrumbs', ['items' => [
+            ['label' => 'Inicio', 'url' => route('inicio')],
+            ['label' => 'Blog']
+        ]])
+        
         <div class="row g-5">
             <div class="col-lg-8">
                 <div class="row g-4">
