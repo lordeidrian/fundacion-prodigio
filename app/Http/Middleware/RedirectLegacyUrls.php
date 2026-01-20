@@ -17,7 +17,14 @@ class RedirectLegacyUrls
         */
 
         // URLs tipo ?p=123
-        if ($request->query->has('p')) {
+        $p = $request->query('p');
+
+        if (
+            ($request->path() === '/' || $request->path() === '')
+            && is_string($p)
+            && preg_match('/^\d+$/', $p)
+            && count($request->query()) === 1
+        ) {
             abort(410);
         }
 
