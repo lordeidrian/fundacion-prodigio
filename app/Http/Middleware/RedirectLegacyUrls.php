@@ -8,27 +8,56 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RedirectLegacyUrls
 {
-    /**
-     * Handle an incoming request and redirect legacy URLs with 301 status
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        // Map of legacy URLs to new URLs
-        $redirects = [
-            'proyectos' => '/nuestro-trabajo',
-            'noticias' => '/blog',
+        /*
+        |--------------------------------------------------------------------------
+        | 1) ELIMINAR WORDPRESS LEGACY (410 GONE)
+        |--------------------------------------------------------------------------
+        */
+
+        // URLs tipo ?p=123
+        if ($request->query->has('p')) {
+            abort(410);
+        }
+
+        $path = ltrim($request->path(), '/');
+
+        $wpLegacyPrefixes = [
+            'wp-admin',
+            'wp-login.php',
+            'wp-content',
+            'wp-includes',
+            'xmlrpc.php',
+            'category',
+            'tag',
+            'feed',
+            'comments',
         ];
 
-        $path = $request->path();
-        
-        // Check for exact matches
+        foreach ($wpLegacyPrefixes as $prefix) {
+            if (str_starts_with($path, $prefix)) {
+                abort(410);
+            }
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | 2) REDIRECCIONES SEO VÁLIDAS (301)
+        |--------------------------------------------------------------------------
+        */
+
+        // Map de URLs antiguas a nuevas
+        $redirects = [
+            'proyectos' => '/nuestro-trabajo',
+            'noticias'  => '/blog',
+        ];
+
         if (isset($redirects[$path])) {
             return redirect($redirects[$path], 301);
         }
 
-        // Check for dynamic routes (e.g., proyectos/slug or noticias/slug)
+        // Dinámicas
         if (str_starts_with($path, 'proyectos/')) {
             $slug = str_replace('proyectos/', '', $path);
             return redirect('/nuestro-trabajo/' . $slug, 301);

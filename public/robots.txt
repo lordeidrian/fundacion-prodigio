@@ -3,5 +3,15 @@ Allow: /
 Disallow: /admin
 Disallow: /filament
 
+# Legacy WP
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-content/
+Disallow: /wp-includes/
+Disallow: /*?p=
+Disallow: /category/
+Disallow: /tag/
+Disallow: /feed/
+
 Sitemap: https://fundacionprodigio.org/sitemap.xml
 

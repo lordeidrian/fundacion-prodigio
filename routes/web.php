@@ -39,3 +39,20 @@ Route::prefix('blog')->name('noticias.')->group(function () {
 // --- Sitemap XML ---
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
 
+/*
+|--------------------------------------------------------------------------
+| 🔥 BLOQUEO DEFINITIVO WORDPRESS (LEGACY SEO)
+|--------------------------------------------------------------------------
+| SIEMPRE AL FINAL
+*/
+
+
+// Rutas wp-*
+Route::any('/wp-{any}', function () {
+    abort(410);
+})->where('any', '.*');
+
+// Categorías, tags, feeds (WordPress)
+Route::any('/category/{any}', fn () => abort(410))->where('any', '.*');
+Route::any('/tag/{any}', fn () => abort(410))->where('any', '.*');
+Route::any('/feed/{any?}', fn () => abort(410))->where('any', '.*');
